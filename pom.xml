@@ -2,16 +2,35 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
-        <groupId>com.alibaba</groupId>
-        <artifactId>parent-pom</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
     </parent>
-    <artifactId>texpr</artifactId>
+
+    <groupId>com.aliyun.tauris</groupId>
+    <artifactId>expression</artifactId>
     <packaging>jar</packaging>
+    <name>TExpr</name>
     <description>Java boolean evaluate and numerical calculation expression</description>
-    <name>com :: aliyun :: tauris :: expression </name>
     <version>1.0.8</version>
+    <url>https://github.com/aliyun/tauris-expression-engine</url>
+
+    <licenses>
+        <license>
+            <name>Apache 2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/aliyun/tauris-expression</url>
+        <connection>https://github.com/aliyun/tauris-expression-engine.git</connection>
+    </scm>
+
     <properties>
         <file_encoding>UTF-8</file_encoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -39,6 +58,19 @@
         </dependency>
 
     </dependencies>
+
+    <developers>
+        <developer>
+            <name>Ray Chaung</name>
+            <id>rockis</id>
+            <email>rockis@gmail.com</email>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
+
 
     <build>
         <plugins>
@@ -86,15 +118,39 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>oss</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>oss</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
     <contributors>
         <contributor>
             <properties>
                 <provider>rockis@gmail.com</provider>
                 <codeName>texpr</codeName>
-                <codeUrl>http://gitlab.alibaba-inc.com/ware/ware-expr/tree/master</codeUrl>
+                <codeUrl>https://github.com/aliyun/tauris-expression-engine/tree/master</codeUrl>
                 <description>contributors added by SCM Plugin, please don't modify it!</description>
             </properties>
         </contributor>
