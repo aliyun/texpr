@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # TExpr 
 Go语言布尔及数值运算表达式解析器
 
@@ -16,55 +15,11 @@ go run test/simple/main.go "99 in [99, 88, 77]"
 go run test/simple/main.go "99 > 100"
 go run test/simple/main.go "33 > 22 && 22 > 11"
 go run test/simple/main.go "'world' =~ /.+orl.+/"
-=======
-# Tauris Expression Engine
-[![Build Status](https://travis-ci.org/tauris-io/expression.svg?branch=master)](https://travis-ci.org/tauris-io/expression) 
-[![Coverage status](https://img.shields.io/codecov/c/github/tauris-io/expression/master.svg)](https://codecov.io/github/tauris-io/expression)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.tauris/expression/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.tauris/expression)
-
-Boolean evaluation and digital calculation expression engine for Java
-
-
-Boolean Evaluation：
-
-```
-$country in ['cn', 'us', 'jp'] && $length > 100
-$host == 'cs.qa.com' && 'Webkit' not in $ua
-```
-
-Digital calculation:
-
-```
-( 1 ^ 5) + (2 << 3)
-4 | 3 + 3
 ```
 
 
 
-## Requirements
-
-Java 1.8+
-
-Maven
-
-```
-  <dependency>
-    <groupId>io.tauris</groupId>
-    <artifactId>expression</artifactId>
-    <version>{ LATEST_VERSION }</version>
-  </dependency>
->>>>>>> 252e63753eea52d4f7c05d7644a973782faf785a
-```
-
-
-
-<<<<<<< HEAD
 ## 数值计算
-=======
-``` java
-import io.tauris.expression.TExpression;
-```
->>>>>>> 252e63753eea52d4f7c05d7644a973782faf785a
 
 | 操作符 | 描述 | 例子   |
 | ------ | ---- | ------ |
