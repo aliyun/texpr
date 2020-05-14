@@ -1,7 +1,29 @@
-# TExpr
-基于Java的布尔表达式及简单数字运算引擎。
+<<<<<<< HEAD
+# TExpr 
+Go语言布尔及数值运算表达式解析器
 
-开发者可以在项目中使用TExpr编译并运行表达式计算
+[source](https://github.com/aliyun/tauris-expression-engine)
+
+## Quick Start
+
+```bash
+git clone git@github.com:aliyun/tauris-expression-engine.git
+cd texpr
+export GOPATH=`pwd`
+go run test/simple/main.go 1+1
+go run test/simple/main.go "(100 * 11) / 25"
+go run test/simple/main.go "99 in [99, 88, 77]"
+go run test/simple/main.go "99 > 100"
+go run test/simple/main.go "33 > 22 && 22 > 11"
+go run test/simple/main.go "'world' =~ /.+orl.+/"
+=======
+# Tauris Expression Engine
+[![Build Status](https://travis-ci.org/tauris-io/expression.svg?branch=master)](https://travis-ci.org/tauris-io/expression) 
+[![Coverage status](https://img.shields.io/codecov/c/github/tauris-io/expression/master.svg)](https://codecov.io/github/tauris-io/expression)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.tauris/expression/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.tauris/expression)
+
+Boolean evaluation and digital calculation expression engine for Java
+
 
 Boolean Evaluation：
 
@@ -27,135 +49,139 @@ Maven
 
 ```
   <dependency>
-    <groupId>com.alibaba.texpr</groupId>
-    <artifactId>texpr</artifactId>
+    <groupId>io.tauris</groupId>
+    <artifactId>expression</artifactId>
     <version>{ LATEST_VERSION }</version>
   </dependency>
+>>>>>>> 252e63753eea52d4f7c05d7644a973782faf785a
 ```
 
-## Tutorials
 
-First import class
 
+<<<<<<< HEAD
+## 数值计算
+=======
 ``` java
-import com.alibaba.texpr.TExpression;
+import io.tauris.expression.TExpression;
 ```
+>>>>>>> 252e63753eea52d4f7c05d7644a973782faf785a
 
-Boolean Evaluation
-
-```
-String expr = "$status == '200' && $request_uri =~ /\\/.*/";
-TExpression expression = TExpression.compile(expr);
-
-MapContext ctx = new MapContext();
-ctx.set("$status", "200");
-ctx.set("$request_uri", "/hello/world");
-
-if (expression.check(ctx)) {
-	// print true
-}
-
-```
-
-
-Digital calculation:
-
-```
-String expr = "1000 / $rnd";
-TExpression expression = TExpression.compile(expr);
-
-MapContext ctx = new MapContext();
-ctx.set("$rnd", 200");
-
-System.out.println(expression.calc(ctx).intValue()); //print 5
-
-```
-
-
-
-## Definition
-### Arithmetic Operators
-
-| Operator | Description | Example   |
+| 操作符 | 描述 | 例子   |
 | ------ | ---- | ------ |
-| +      | addition   | 1+1=2  |
-| -      | subtraction   | 2-1=1  |
-| *      | multiplication   | 2*2=4  |
-| /      | division   | 2/2=1  |
-| %      | modulus | 5/2=1  |
-| ^      | pow   | 2^4=16 |
+| +      | 加   | 1+1=2  |
+| -      | 减   | 2-1=1  |
+| *      | 乘   | 2*2=4  |
+| /      | 除   | 2/2=1  |
+| %      | 取余 | 5/2=1  |
+| ^      | 幂   | 2^4=16 |
 
 *不支持位运算*
 
-### Comparison Operators
+## 布尔计算
 
-| Operator | Description                                                         | Example         |
+### 关系运算符
+
+| 操作符 | 描述                                                         | 例子         |
 | ------ | ------------------------------------------------------------ | ------------ |
-| ==    | equal    | $A==$B     |
-| !=    | not equal    | $A!=$B     |
-| >   | greater than | $A>$B  |
-| <    | less than | $A<$B |
-| >=     | greater than or equal to     | $A>=$B    |
-| <=   | less than or equal to)| $A<=$B |
+| =     | 两值相等     | A=B     |
+| >   | 左值大于右值 | A>B  |
+| <    | 右值大于左值 | A<B |
+| >=     | 左值大于等于右值     | A>=B    |
+| <=   | 右值大于等于左值 | A<=B |
 
-*notice the type of left value MUST same with right value*
+*左值和右值必须为同类型*
 
 
-### Logical Operators
+### 逻辑运算符
 
-| Operator | Description                                                         | Example         |
+| 操作符 | 描述                                                         | 例子         |
 | ------ | ------------------------------------------------------------ | ------------ |
-| &&     | and    | $A && $B       |
-| \|\|   | or | $A \|\| $B     |
-| not    | not | not（$A && $B) |
+| &&     | 称为逻辑与运算符。当且仅当两个操作数都为真，条件才为真。     | A && B       |
+| \|\|   | 称为逻辑或操作符。如果任何两个操作数任何一个为真，条件为真。 | A \|\| B     |
+| not    | 称为逻辑非运算符。用来反转操作数的逻辑状态。如果条件为true，则逻辑非运算符将得到false。 | not（A && B) |
 
-### Contain Operator
+### 包含表达式
 
-| Operator |      Description                                                    | Example         |
+| 操作符 | 描述                                                         | 例子         |
 | ------ | ------------------------------------------------------------ | ------------ |
-| in     | true, if the left value in the right value    | $c in ['a', 'b', 'c', 'd'] |
+| in     | 判断左值是否被在右值中，右值需要为数组类型    | A in [A, B, C, D]       |
 
 
 
-### Regular Expression Match
+### 正则匹配
 
-| Operator | Description                                                        | Example         |
+| 操作符 | 描述                                                         | 例子         |
 | ------ | ------------------------------------------------------------ | ------------ |
-| =~    | true, the right expressio is matched to left value    | 'world' =~ /.+orl.+/       |
+| =~    | 判断左值是匹配右值，右值是正则表达式    | 'world' =~ /.+orl.+/       |
 
 
 
-### IS 
+### IS 判断
 
-| Operator | Description                         | Example       |
+| 操作符 | 描述                         | 例子       |
 | ------ | ---------------------------- | ---------- |
-| is     | left value IS the right type | $v is empty |
-| is not   | left vlaue IS NOT the right type | $v is not null |
+| is     | 判断左值是否是右值代表的类型 | A is empty |
+| is not   | 判断左值是否*不是*右值代表的类型 | A is not null |
 
-below is right types:
+支持的类型如下
 
-| name | Description                        | Example       |
+| 名称 | 描述                         | 例子       |
 | ------ | ---------------------------- | ---------- |
-| string    || $v is string |
-| integer   | | $v is integer |
-| float   |  | $v is float |
-| boolean   |  | $v is boolean && not $v |
-| host    | hostname | $v is host |
-| ip4    | ipv4 address | $v is ip4 |
-| empty    | null、empty string or empty array | $v is not empty |
-| null    | null | $v is not null |
+| string    | 字符串 | A is string |
+| integer   | 整数 | A is integer |
+| float   | 浮点数 | A is float |
+| boolean   | 布尔值 | A is boolean && not A |
+| host    | 主机名 | A is host |
+| ip4    | ipv4地址 | A is ip4 |
+| empty    | null、空字符、空数组 | A is not empty |
+| null    | null | A is not null |
 
-### Function
 
-#### eval
+## Development
 
-Evaluated an expression
+### 简单表达式计算
 
-example:
+```go
+import (
+	"fmt"
+	"log"
+	"os"
+
+	t "github.com/aliyun/tauris-expression-engine"
+)
+
+func main() {
+  input := "99 in "33 > 22 && 22 > 11"
+	expr, err := t.Compile(input)
+
+	if err != nil {
+		log.Fatalf("expression err, %s", os.Args[1])
+	}
+	v, err := expr.Eval(nil)
+	fmt.Println(v)
+}
+```
+
+### 带有变量的表达式计算
+
+表达式中可以带有变量，表达式中的变量必须以'$'或者'@'开头，如：
 
 ```
-// $exp = "$remote_addr is ip4"
-"eval($exp)"
+expr, err := t.Compile("($value - 10) / @meta")
+m := <make an object>
+v, err := expr.Eval(m)
+if err != nil {
+log.Fatalf("expression err, %s", err)
+}
 ```
 
+其中  **expr.Eval()** 的参数m，必须实现下面的interface
+
+```
+type ValueGetter interface {
+	Get(name string) interface{}
+}
+```
+
+在执行时，解释器会调用参数的Get方法取得表达式中变量的值，详细实现可以参考范例 test/variable/main.go
 
