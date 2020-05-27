@@ -1,4 +1,4 @@
-package compiler
+package expr
 
 import (
 	"fmt"
@@ -23,6 +23,14 @@ func Compile(expr string) (Expression, error) {
 	p := ast.NewTExprParser(stream)
 	visitor := &ExprVisitor{}
 	return p.Parse().Accept(visitor).(Expression), nil
+}
+
+func MustCompile(expr string) Expression {
+	exp, err := Compile(expr)
+	if err != nil {
+		return nil
+	}
+	return exp
 }
 
 type Expression interface {
