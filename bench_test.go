@@ -2,8 +2,6 @@ package texpr
 
 import (
 	"testing"
-
-	"github.com/aliyun/tauris-expression-engine/compiler"
 )
 
 type Entity struct {
@@ -26,7 +24,7 @@ func Benchmark_expr(b *testing.B) {
 	params["$Value"] = 100.0
 	entity := &Entity{params}
 
-	program, err := compiler.Compile(`($Origin == "MOW" || $Country == "RU") && ($Value >= 100 || $Adults == 1)`)
+	program, err := Compile(`($Origin == "MOW" || $Country == "RU") && ($Value >= 100 || $Adults == 1)`)
 	if err != nil {
 		b.Fatal(err)
 	}
