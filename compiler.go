@@ -1,4 +1,4 @@
-package expr
+package texpr
 
 import (
 	"fmt"
@@ -9,7 +9,7 @@ import (
 	"strings"
 
 	"github.com/antlr/antlr4/runtime/Go/antlr"
-	"github.com/aliyun/tauris-expression-engine/ast"
+	"github.com/aliyun/texpr/ast"
 )
 
 type ValueGetter interface {

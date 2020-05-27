@@ -5,11 +5,11 @@ import (
 	"log"
 	"os"
 
-	"github.com/aliyun/tauris-expression-engine/compiler"
+	"github.com/aliyun/texpr"
 )
 
 func main() {
-	expr, err := compiler.Compile(os.Args[1])
+	expr, err := texpr.Compile(os.Args[1])
 
 	if err != nil {
 		log.Fatalf("expression err, %s", os.Args[1])

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/aliyun/tauris-expression-engine/compiler"
+	"github.com/aliyun/texpr"
 )
 
 type valuegetter map[string]interface{}
@@ -26,7 +26,7 @@ func (vg valuegetter) Get(name string) interface{} {
 func main() {
 	m := MakeVG("$value", 15.0)
 
-	expr, err := compiler.Compile("$value - 10")
+	expr, err := texpr.Compile("$value - 10")
 
 	if err != nil {
 		log.Fatalf("expression err, %s", err)

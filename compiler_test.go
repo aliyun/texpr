@@ -1,4 +1,4 @@
-package expr
+package texpr
 
 import (
 	"fmt"
