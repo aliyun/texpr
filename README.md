@@ -4,7 +4,7 @@ Go语言布尔及数值运算表达式解析器
 [![Build Status](https://travis-ci.org/aliyun/texpr.svg?branch=master)](https://travis-ci.org/aliyun/texpr)
 [![Coverage status](https://img.shields.io/codecov/c/github/aliyun/texpr/master.svg)](https://codecov.io/github/aliyun/texpr)
 
-[source](https://github.com/aliyun/texpr)
+[Java语言版本](https://github.com/tauris-io/expression)
 
 ## Quick Start
 
