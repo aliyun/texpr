@@ -1,7 +1,12 @@
-language: java
-jdk:
-  - openjdk8
-install: mvn install -DskipTests=true -Dgpg.skip=true
+language: go
 
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+go:
+- "1.12"
+- "1.13"
+- "1.14"
+
+install:
+- go get github.com/antlr/antlr4
+
+script:
+- go test
