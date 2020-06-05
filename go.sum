@@ -1,4 +1,5 @@
 github.com/aliyun/tauris-expression-engine v1.0.5 h1:GCd3A9vJESt9sUPZfwtoHfUMNIW+akWau8WTHhLP+rs=
 github.com/aliyun/tauris-expression-engine v1.0.5/go.mod h1:0bdPQrZwsgQYnUMAvYXbqlXffqMkMGkmVRg94Aw4vNM=
+github.com/aliyun/tauris-expression-engine v1.0.6 h1:IGNQmeJdspgLExF6fGYdQ5OeLl1RlwdwTXQeEmlmG10=
 github.com/antlr/antlr4 v0.0.0-20200417160354-8c50731894e0 h1:j7MyDjg6pb7A2ziow17FDZ2Oj5vGnJsLyDmjpN4Jkcg=
 github.com/antlr/antlr4 v0.0.0-20200417160354-8c50731894e0/go.mod h1:T7PbCXFs94rrTttyxjbyT5+/1V8T2TYDejxUfHJjw1Y=

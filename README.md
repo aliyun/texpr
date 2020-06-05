@@ -1,14 +1,16 @@
 # TExpr 
 Go语言布尔及数值运算表达式解析器
 
-[source](https://github.com/aliyun/tauris-expression-engine)
+[![Build Status](https://travis-ci.org/aliyun/texpr.svg?branch=master)](https://travis-ci.org/aliyun/texpr)
+[![Coverage status](https://img.shields.io/codecov/c/github/aliyun/texpr/master.svg)](https://codecov.io/github/aliyun/texpr)
+
+[Java语言版本](https://github.com/tauris-io/expression)
 
 ## Quick Start
 
 ```bash
-git clone git@github.com:aliyun/tauris-expression-engine.git
+git clone git@github.com:aliyun/texpr.git
 cd texpr
-export GOPATH=`pwd`
 go run test/simple/main.go 1+1
 go run test/simple/main.go "(100 * 11) / 25"
 go run test/simple/main.go "99 in [99, 88, 77]"
@@ -102,11 +104,11 @@ import (
 	"log"
 	"os"
 
-	t "github.com/aliyun/tauris-expression-engine"
+	t "github.com/aliyun/texpr"
 )
 
 func main() {
-  input := "99 in "33 > 22 && 22 > 11"
+    input := "99 in "33 > 22 && 22 > 11"
 	expr, err := t.Compile(input)
 
 	if err != nil {
