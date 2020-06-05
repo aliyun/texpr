@@ -19,10 +19,13 @@ type ValueGetter interface {
 func Compile(expr string) (Expression, error) {
 	input := antlr.NewInputStream(expr)
 	lexer := ast.NewTExprLexer(input)
-	stream := antlr.NewCommonTokenStream(lexer, 0)
-	p := ast.NewTExprParser(stream)
+	tokens := antlr.NewCommonTokenStream(lexer, 0)
+	parser := ast.NewTExprParser(tokens)
+	parser.RemoveErrorListeners()
+	parser.AddErrorListener(antlr.NewConsoleErrorListener())
 	visitor := &ExprVisitor{}
-	return p.Parse().Accept(visitor).(Expression), nil
+	exp := parser.Parse().Accept(visitor)
+	return exp.(Expression), nil
 }
 
 func MustCompile(expr string) Expression {
@@ -113,6 +116,26 @@ func pow(left, right interface{}) interface{} {
 
 func mod(left, right interface{}) interface{} {
 	return math.Mod(left.(float64), right.(float64))
+}
+
+func band(left, right interface{}) interface{} {
+	return left.(int64) & right.(int64)
+}
+
+func beor(left, right interface{}) interface{} {
+	return int64(left.(float64)) ^ int64(right.(float64))
+}
+
+func bior(left, right interface{}) interface{} {
+	return int64(left.(float64)) | int64(right.(float64))
+}
+
+func lshift(left, right interface{}) interface{} {
+	return int64(left.(float64)) << int64(right.(float64))
+}
+
+func rshift(left, right interface{}) interface{} {
+	return int64(left.(float64)) >> int64(right.(float64))
 }
 
 func comparable(items ...interface{}) bool {
@@ -345,6 +368,22 @@ type VariableExpr struct {
 	name string
 }
 
+func (e *VariableExpr) contain(vg ValueGetter, sub interface{}) bool {
+	val := vg.Get(e.name)
+	if val == nil {
+		return false
+	}
+	if val == sub {
+		return true
+	}
+	vt := reflect.TypeOf(val)
+	rt := reflect.TypeOf(sub)
+	if rt.Kind() == reflect.String && vt.Kind() == reflect.String {
+		return strings.Contains(val.(string), sub.(string))
+	}
+	return false
+}
+
 func (e *VariableExpr) Eval(vg ValueGetter) (interface{}, error) {
 	val := vg.Get(e.name)
 	if val == nil {
@@ -358,54 +397,67 @@ func (e *VariableExpr) String() string {
 }
 
 type ArrayExpr struct {
-	Array []Expression
+	Array []interface{}
 	Type  reflect.Type
+	Set   map[interface{}]int
+}
+
+func NewArrayExpr(es []Expression, t reflect.Type) *ArrayExpr {
+	set := make(map[interface{}]int)
+	ary := make([]interface{}, len(es))
+	for _, e := range es {
+		v, _ := e.Eval(nil)
+		set[v] = 0
+		ary = append(ary, v)
+	}
+	return &ArrayExpr{
+		Array: ary,
+		Type:  t,
+		Set:   set,
+	}
 }
 
 func (e *ArrayExpr) Eval(vg ValueGetter) (interface{}, error) {
-	array := make([]interface{}, len(e.Array))
-	for idx, _ := range array {
-		v, err := e.Array[idx].Eval(vg)
-		if err != nil {
-			return nil, err
-		}
-		array[idx] = v
-	}
-	return array, nil
+	return e.Array, nil
+}
+
+func (e *ArrayExpr) contain(vg ValueGetter, val interface{}) bool {
+	_, b := e.Set[val]
+	return b
 }
 
 func (e *ArrayExpr) String() string {
 	array := make([]string, len(e.Array))
 	for idx := range array {
-		array[idx] = e.Array[idx].String()
+		array[idx] = fmt.Sprintf("%s", e.Array[idx])
 	}
 	return fmt.Sprintf("[%s]", strings.Join(array, ","))
 }
 
+type ContainerExpr interface {
+	contain(vg ValueGetter, v interface{}) bool
+}
+
 type InExpr struct {
-	left  Expression
-	array *ArrayExpr
-	not   bool
+	left      Expression
+	container ContainerExpr
+	not       bool
 }
 
 func (e *InExpr) Eval(vg ValueGetter) (interface{}, error) {
 	val, err := e.left.Eval(vg)
-	if err != nil {
+	if err != nil || val == nil {
 		return nil, err
 	}
-	ary, err := e.array.Eval(vg)
-	if err != nil {
-		return nil, err
-	}
-	ret := ListContainsValue(val, ary.([]interface{}), e.array.Type)
+	b := e.container.contain(vg, val)
 	if e.not {
-		return !ret, nil
+		return !b, nil
 	}
-	return ret, nil
+	return b, nil
 }
 
 func (e *InExpr) String() string {
-	return fmt.Sprintf("%s in %s", e.left.String(), e.array.String())
+	return fmt.Sprintf("%s in %s", e.left.String(), e.String())
 }
 
 func ListContainsValue(val interface{}, array []interface{}, typ reflect.Type) bool {
@@ -449,7 +501,7 @@ func NewMatchExpr(left Expression, regex string) (Expression, error) {
 }
 
 type ExprVisitor struct {
-	*antlr.BaseParseTreeVisitor
+	*ast.BaseTExprParserVisitor
 }
 
 func (v *ExprVisitor) VisitParse(ctx *ast.ParseContext) interface{} {
@@ -464,15 +516,42 @@ func (v *ExprVisitor) VisitBinaryExpression(ctx *ast.BinaryExpressionContext) in
 }
 
 func (v *ExprVisitor) VisitMatchExpression(ctx *ast.MatchExpressionContext) interface{} {
-	left := ctx.Expression().Accept(v).(Expression)
-	regex := ctx.Regex().Accept(v).(*regexp.Regexp)
-	return &MatchExpr{left, regex}
+	regex := strings.TrimSpace(ctx.Regex().GetText())
+	r := regexp.MustCompile(regex[1 : len(regex)-1])
+	left := ctx.Expression().Accept(v)
+	return &MatchExpr{left.(Expression), r}
 }
 
 func (v *ExprVisitor) VisitInExpression(ctx *ast.InExpressionContext) interface{} {
 	left := ctx.Expression().Accept(v).(Expression)
-	array := ctx.Array().Accept(v).(*ArrayExpr)
-	return &InExpr{left, array, false}
+	return &InExpr{
+		left:      left.(Expression),
+		container: ctx.Container().Accept(v).(ContainerExpr),
+		not:       false,
+	}
+}
+
+func (v *ExprVisitor) VisitNotInExpression(ctx *ast.NotInExpressionContext) interface{} {
+	left := ctx.Expression().Accept(v).(Expression)
+	return &InExpr{
+		left:      left.(Expression),
+		container: ctx.Container().Accept(v).(ContainerExpr),
+		not:       true,
+	}
+}
+
+func (v *ExprVisitor) VisitContainer(ctx *ast.ContainerContext) interface{} {
+	if ctx.Array() != nil {
+		return ctx.Array().Accept(v)
+	}
+	if ctx.Variable() != nil {
+		return ctx.Variable().Accept(v)
+	}
+	if ctx.TString() != nil {
+		c := ctx.TString().GetText()
+		return NewValueExpression(c[1 : len(c)-1])
+	}
+	return v.VisitContainer(ctx)
 }
 
 func (v *ExprVisitor) VisitIsTypeExpression(ctx *ast.IsTypeExpressionContext) interface{} {
@@ -498,12 +577,6 @@ func (v *ExprVisitor) VisitNotExpression(ctx *ast.NotExpressionContext) interfac
 
 func (v *ExprVisitor) VisitParenExpression(ctx *ast.ParenExpressionContext) interface{} {
 	return ctx.Expression().Accept(v)
-}
-
-func (v *ExprVisitor) VisitNotInExpression(ctx *ast.NotInExpressionContext) interface{} {
-	left := ctx.Expression().Accept(v).(Expression)
-	array := ctx.Array().Accept(v).(*ArrayExpr)
-	return &InExpr{left, array, true}
 }
 
 func (v *ExprVisitor) VisitComparatorExpression(ctx *ast.ComparatorExpressionContext) interface{} {
@@ -577,12 +650,49 @@ func (v *ExprVisitor) VisitLiteral(ctx *ast.LiteralContext) interface{} {
 		vt, _ := strconv.ParseFloat(ctx.Float().GetText(), 64)
 		return NewValueExpression(vt)
 	}
-	if ctx.Varchar() != nil {
+	if ctx.TString() != nil {
 		s := ctx.GetText()
 		l := len(s)
 		return NewValueExpression(s[1 : l-1])
 	}
 	return v.VisitChildren(ctx)
+}
+
+func (v *ExprVisitor) VisitCalc(ctx *ast.CalcContext) interface{} {
+	return ctx.Bit().Accept(v)
+}
+
+func (v *ExprVisitor) VisitBit(ctx *ast.BitContext) interface{} {
+	var left Expression
+	if ctx.Bit() != nil {
+		left = ctx.Bit().Accept(v).(Expression)
+	}
+	right := ctx.Shift().Accept(v).(Expression)
+	if ctx.BAND() != nil {
+		return NewBiCalcExpr(left, right, NewOP("&", band))
+	}
+	if ctx.BEOR() != nil {
+		return NewBiCalcExpr(left, right, NewOP("^", beor))
+	}
+	if ctx.BIOR() != nil {
+		return NewBiCalcExpr(left, right, NewOP("|", bior))
+	}
+	return right
+}
+
+func (v *ExprVisitor) VisitShift(ctx *ast.ShiftContext) interface{} {
+	var left Expression
+	if ctx.Shift() != nil {
+		left = ctx.Shift().Accept(v).(Expression)
+	}
+	right := ctx.Plus().Accept(v).(Expression)
+	if ctx.LSHIFT() != nil {
+		return NewBiCalcExpr(left, right, NewOP("<<", lshift))
+	}
+	if ctx.RSHIFT() != nil {
+		return NewBiCalcExpr(left, right, NewOP(">>", rshift))
+	}
+	return right
 }
 
 func (v *ExprVisitor) VisitArray(ctx *ast.ArrayContext) interface{} {
@@ -601,10 +711,6 @@ func (v *ExprVisitor) VisitArray(ctx *ast.ArrayContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *ExprVisitor) VisitCalc(ctx *ast.CalcContext) interface{} {
-	return ctx.Plus().Accept(v)
-}
-
 func (v *ExprVisitor) VisitPlus(ctx *ast.PlusContext) interface{} {
 	if ctx.MINUS() != nil {
 		left := ctx.Plus().Accept(v).(Expression)
@@ -619,49 +725,32 @@ func (v *ExprVisitor) VisitPlus(ctx *ast.PlusContext) interface{} {
 }
 
 func (v *ExprVisitor) VisitMultiplying(ctx *ast.MultiplyingContext) interface{} {
+	var left Expression
+	if ctx.Multiplying() != nil {
+		left = ctx.Multiplying().Accept(v).(Expression)
+	}
+	right := ctx.Atom().Accept(v).(Expression)
 	if ctx.DIV() != nil {
-		left := ctx.Multiplying().Accept(v).(Expression)
-		right := ctx.Pow().Accept(v).(Expression)
 		return NewBiCalcExpr(left, right, NewOP("/", div))
 	}
 	if ctx.MUL() != nil {
-		left := ctx.Multiplying().Accept(v).(Expression)
-		right := ctx.Pow().Accept(v).(Expression)
 		return NewBiCalcExpr(left, right, NewOP("*", mul))
 	}
 	if ctx.MOD() != nil {
-		left := ctx.Multiplying().Accept(v).(Expression)
-		right := ctx.Pow().Accept(v).(Expression)
 		return NewBiCalcExpr(left, right, NewOP("%", mod))
 	}
-	return ctx.Pow().Accept(v)
+	return right
 }
 
-func (v *ExprVisitor) VisitPow(ctx *ast.PowContext) interface{} {
-	if ctx.POW() != nil {
-		left := ctx.Atom(0).Accept(v).(Expression)
-		right := ctx.Atom(1).Accept(v).(Expression)
-		return NewBiCalcExpr(left, right, NewOP("^", pow))
-	}
-	return ctx.Atom(0).Accept(v)
-}
-
-func (v *ExprVisitor) VisitAtom(ctx *ast.AtomContext) interface{} {
-	if ctx.LPAREN() != nil && ctx.RPAREN() != nil {
-		return ctx.Plus().Accept(v)
-	}
-	if ctx.Variable() != nil {
-		return ctx.Variable().Accept(v)
-	}
-	if ctx.Scientific() != nil {
-		return ctx.Scientific().Accept(v)
-	}
-	if ctx.Function() != nil {
-		return ctx.Function().Accept(v)
-	}
-
-	return v.VisitChildren(ctx)
-}
+//
+//func (v *ExprVisitor) VisitPow(ctx *ast.PowContext) interface{} {
+//	if ctx.POW() != nil {
+//		left := ctx.Atom(0).Accept(v).(Expression)
+//		right := ctx.Atom(1).Accept(v).(Expression)
+//		return NewBiCalcExpr(left, right, NewOP("^", pow))
+//	}
+//	return ctx.Atom(0).Accept(v)
+//}
 
 func (v *ExprVisitor) VisitScientific(ctx *ast.ScientificContext) interface{} {
 	return v.VisitChildren(ctx)
@@ -679,24 +768,18 @@ func (v *ExprVisitor) VisitNumber(ctx *ast.NumberContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *ExprVisitor) VisitRegex(ctx *ast.RegexContext) interface{} {
-	regex := ctx.Regex().GetText()
-	l := len(regex)
-	return regexp.MustCompile(regex[1 : l-1])
-}
-
 func (v *ExprVisitor) VisitKind(ctx *ast.KindContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
 func (v *ExprVisitor) VisitStrings(ctx *ast.StringsContext) interface{} {
-	ss := make([]Expression, len(ctx.AllVarchar()))
+	ss := make([]Expression, len(ctx.AllTString()))
 	for idx, _ := range ss {
-		s := ctx.Varchar(idx).GetText()
+		s := ctx.TString(idx).GetText()
 		l := len(s)
 		ss[idx] = NewValueExpression(s[1 : l-1])
 	}
-	return &ArrayExpr{ss, reflect.TypeOf("")}
+	return NewArrayExpr(ss, reflect.TypeOf(""))
 }
 
 func (v *ExprVisitor) VisitIntegers(ctx *ast.IntegersContext) interface{} {
@@ -706,7 +789,7 @@ func (v *ExprVisitor) VisitIntegers(ctx *ast.IntegersContext) interface{} {
 		f, _ := strconv.ParseInt(s, 10, 64)
 		ss[idx] = NewValueExpression(f)
 	}
-	return &ArrayExpr{ss, reflect.TypeOf(int64(0))}
+	return NewArrayExpr(ss, reflect.TypeOf(int64(0)))
 }
 
 func (v *ExprVisitor) VisitFloats(ctx *ast.FloatsContext) interface{} {
@@ -716,7 +799,7 @@ func (v *ExprVisitor) VisitFloats(ctx *ast.FloatsContext) interface{} {
 		f, _ := strconv.ParseFloat(s, 64)
 		ss[idx] = NewValueExpression(f)
 	}
-	return &ArrayExpr{ss, reflect.TypeOf(float64(0))}
+	return NewArrayExpr(ss, reflect.TypeOf(float64(0)))
 }
 
 func (v *ExprVisitor) VisitBooleans(ctx *ast.BooleansContext) interface{} {
@@ -726,5 +809,26 @@ func (v *ExprVisitor) VisitBooleans(ctx *ast.BooleansContext) interface{} {
 		f, _ := strconv.ParseBool(s)
 		ss[idx] = NewValueExpression(f)
 	}
-	return &ArrayExpr{ss, reflect.TypeOf(true)}
+	return NewArrayExpr(ss, reflect.TypeOf(true))
+}
+
+func (v *ExprVisitor) VisitAtom(ctx *ast.AtomContext) interface{} {
+	if ctx.LPAREN() != nil && ctx.RPAREN() != nil {
+		return ctx.Bit().Accept(v)
+	}
+	if ctx.Variable() != nil {
+		return ctx.Variable().Accept(v)
+	}
+	if ctx.Scientific() != nil {
+		return ctx.Scientific().Accept(v)
+	}
+	if ctx.Function() != nil {
+		return ctx.Function().Accept(v)
+	}
+
+	return v.VisitChildren(ctx)
+}
+
+type TExprErrorListener struct {
+	antlr.ErrorListener
 }

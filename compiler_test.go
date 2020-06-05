@@ -5,15 +5,15 @@ import (
 	"testing"
 )
 
-type valuegetter map[string]interface{}
+type H map[string]interface{}
+//
+//func MakeVG(name string, val interface{}) H {
+//	m := make(map[string]interface{})
+//	m[name] = val
+//	return m
+//}
 
-func MakeVG(name string, val interface{}) valuegetter {
-	m := make(map[string]interface{})
-	m[name] = val
-	return m
-}
-
-func (vg valuegetter) Get(name string) interface{} {
+func (vg H) Get(name string) interface{} {
 	v, ok := vg[name]
 	if ok {
 		return v
@@ -40,7 +40,9 @@ func TestEval(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expression err, %s", err)
 	}
-	vg := MakeVG("$v", 15.5)
+	vg := H{
+		"$v": 15.5,
+	}
 	v, err = expr.Eval(vg)
 	if err != nil {
 		t.Fatalf("expression err, %s", err)
@@ -74,7 +76,8 @@ func TestEval(t *testing.T) {
 
 	expr, _ = Compile("2 ^ 3")
 	v, err = expr.Eval(nil)
-	if v != 8.0 {
+	fmt.Println(v)
+	if v.(int64) != 1 {
 		t.FailNow()
 	}
 
@@ -136,12 +139,6 @@ func TestEval(t *testing.T) {
 		t.FailNow()
 	}
 
-	expr, _ = Compile("'hello world' =~ /^hello .*$/")
-	v, err = expr.Eval(nil)
-	if v != true {
-		fmt.Println("invalid value", v)
-		t.FailNow()
-	}
 
 	expr, _ = Compile("'15.5.5' is not ip4")
 	v, err = expr.Eval(nil)
@@ -164,7 +161,9 @@ func TestEval(t *testing.T) {
 		t.FailNow()
 	}
 
-	vg = MakeVG("$t", true)
+	vg = H{
+		"$t": true,
+	}
 	expr, _ = Compile("$t")
 	v, err = expr.Eval(vg)
 	if err != nil {
@@ -176,7 +175,9 @@ func TestEval(t *testing.T) {
 		t.FailNow()
 	}
 
-	vg = MakeVG("$f", false)
+	vg = H{
+		"$f": false,
+	}
 	expr, _ = Compile("$f")
 	v, err = expr.Eval(vg)
 	if v != false {
@@ -184,8 +185,39 @@ func TestEval(t *testing.T) {
 		t.FailNow()
 	}
 
-	expr, _ = Compile("'vvv' in ['aaa', 'bbb', 'vvv']")
+}
+
+func TestEvalMatch(t *testing.T) {
+	var err error
+	defer func() {
+		if err != nil {
+			panic(err)
+		}
+	}()
+	expr, _ := Compile("'hello world' =~ /^hello .*$/")
+	v, err := expr.Eval(nil)
+	if v != true {
+		fmt.Println("invalid value", v)
+		t.FailNow()
+	}
+
+	expr, _ = Compile("'hello world' =~ /^hello .*$/ && 'hello world' =~ /.*world$/")
 	v, err = expr.Eval(nil)
+	if v != true {
+		fmt.Println("invalid value", v)
+		t.FailNow()
+	}
+}
+
+func TestEvalIn(t *testing.T) {
+	var err error
+	defer func() {
+		if err != nil {
+			panic(err)
+		}
+	}()
+	expr, _ := Compile("'vvv' in ['aaa', 'bbb', 'vvv']")
+	v, _ := expr.Eval(nil)
 	if v != true {
 		fmt.Println("invalid value", v)
 		t.FailNow()
@@ -206,11 +238,19 @@ func TestEval(t *testing.T) {
 	}
 
 	expr, _ = Compile("@source == 'world'")
-	vg = MakeVG("@source", "world")
+	vg := H{
+		"@source": "world",
+	}
 	v, err = expr.Eval(vg)
 	if v != true {
 		fmt.Println("invalid value", v)
 		t.FailNow()
 	}
 
+	expr, _ = Compile("'wo' in @source")
+	v, err = expr.Eval(vg)
+	if v != true {
+		fmt.Printf("'wo' in @source, but not")
+		t.FailNow()
+	}
 }

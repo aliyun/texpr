@@ -1,10 +1,10 @@
-// Code generated from TExpr.g4 by ANTLR 4.7.2. DO NOT EDIT.
+// Code generated from TExprParser.g4 by ANTLR 4.7.2. DO NOT EDIT.
 
-package ast // TExpr
+package ast // TExprParser
 import "github.com/antlr/antlr4/runtime/Go/antlr"
 
 // A complete Visitor for a parse tree produced by TExprParser.
-type TExprVisitor interface {
+type TExprParserVisitor interface {
 	antlr.ParseTreeVisitor
 
 	// Visit a parse tree produced by TExprParser#parse.
@@ -58,20 +58,26 @@ type TExprVisitor interface {
 	// Visit a parse tree produced by TExprParser#literal.
 	VisitLiteral(ctx *LiteralContext) interface{}
 
+	// Visit a parse tree produced by TExprParser#container.
+	VisitContainer(ctx *ContainerContext) interface{}
+
 	// Visit a parse tree produced by TExprParser#array.
 	VisitArray(ctx *ArrayContext) interface{}
 
 	// Visit a parse tree produced by TExprParser#calc.
 	VisitCalc(ctx *CalcContext) interface{}
 
+	// Visit a parse tree produced by TExprParser#bit.
+	VisitBit(ctx *BitContext) interface{}
+
+	// Visit a parse tree produced by TExprParser#shift.
+	VisitShift(ctx *ShiftContext) interface{}
+
 	// Visit a parse tree produced by TExprParser#plus.
 	VisitPlus(ctx *PlusContext) interface{}
 
 	// Visit a parse tree produced by TExprParser#multiplying.
 	VisitMultiplying(ctx *MultiplyingContext) interface{}
-
-	// Visit a parse tree produced by TExprParser#pow.
-	VisitPow(ctx *PowContext) interface{}
 
 	// Visit a parse tree produced by TExprParser#atom.
 	VisitAtom(ctx *AtomContext) interface{}
@@ -84,6 +90,9 @@ type TExprVisitor interface {
 
 	// Visit a parse tree produced by TExprParser#funcname.
 	VisitFuncname(ctx *FuncnameContext) interface{}
+
+	// Visit a parse tree produced by TExprParser#parameters.
+	VisitParameters(ctx *ParametersContext) interface{}
 
 	// Visit a parse tree produced by TExprParser#number.
 	VisitNumber(ctx *NumberContext) interface{}
