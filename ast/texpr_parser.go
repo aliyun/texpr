@@ -1,6 +1,6 @@
-// Code generated from TExpr.g4 by ANTLR 4.8. DO NOT EDIT.
+// Code generated from TExprParser.g4 by ANTLR 4.8. DO NOT EDIT.
 
-package ast // TExpr
+package ast // TExprParser
 import (
 	"fmt"
 	"reflect"
@@ -15,148 +15,162 @@ var _ = reflect.Copy
 var _ = strconv.Itoa
 
 var parserATN = []uint16{
-	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 49, 265,
+	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 46, 298,
 	4, 2, 9, 2, 4, 3, 9, 3, 4, 4, 9, 4, 4, 5, 9, 5, 4, 6, 9, 6, 4, 7, 9, 7,
 	4, 8, 9, 8, 4, 9, 9, 9, 4, 10, 9, 10, 4, 11, 9, 11, 4, 12, 9, 12, 4, 13,
 	9, 13, 4, 14, 9, 14, 4, 15, 9, 15, 4, 16, 9, 16, 4, 17, 9, 17, 4, 18, 9,
 	18, 4, 19, 9, 19, 4, 20, 9, 20, 4, 21, 9, 21, 4, 22, 9, 22, 4, 23, 9, 23,
-	4, 24, 9, 24, 4, 25, 9, 25, 3, 2, 3, 2, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-	3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 3, 63, 10, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+	4, 24, 9, 24, 4, 25, 9, 25, 4, 26, 9, 26, 4, 27, 9, 27, 3, 2, 3, 2, 3,
+	2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 3, 67, 10,
 	3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-	3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 7, 3, 90, 10, 3, 12,
-	3, 14, 3, 93, 11, 3, 3, 4, 3, 4, 3, 4, 5, 4, 98, 10, 4, 3, 5, 3, 5, 3,
-	6, 3, 6, 3, 7, 3, 7, 3, 8, 3, 8, 3, 9, 3, 9, 5, 9, 110, 10, 9, 3, 9, 3,
-	9, 3, 9, 5, 9, 115, 10, 9, 3, 9, 3, 9, 3, 9, 5, 9, 120, 10, 9, 3, 9, 3,
-	9, 3, 9, 5, 9, 125, 10, 9, 3, 9, 5, 9, 128, 10, 9, 3, 10, 3, 10, 3, 11,
-	3, 11, 3, 11, 3, 11, 3, 11, 3, 11, 3, 11, 3, 11, 3, 11, 7, 11, 141, 10,
-	11, 12, 11, 14, 11, 144, 11, 11, 3, 12, 3, 12, 3, 12, 3, 12, 3, 12, 3,
-	12, 3, 12, 3, 12, 3, 12, 3, 12, 3, 12, 3, 12, 7, 12, 158, 10, 12, 12, 12,
-	14, 12, 161, 11, 12, 3, 13, 3, 13, 3, 13, 3, 13, 3, 13, 5, 13, 168, 10,
-	13, 3, 14, 3, 14, 3, 14, 3, 14, 3, 14, 3, 14, 3, 14, 5, 14, 177, 10, 14,
-	3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 5, 15, 184, 10, 15, 3, 16, 3, 16, 3,
-	16, 3, 16, 3, 16, 3, 17, 3, 17, 3, 18, 3, 18, 3, 18, 7, 18, 196, 10, 18,
-	12, 18, 14, 18, 199, 11, 18, 3, 19, 5, 19, 202, 10, 19, 3, 19, 6, 19, 205,
-	10, 19, 13, 19, 14, 19, 206, 3, 19, 3, 19, 6, 19, 211, 10, 19, 13, 19,
-	14, 19, 212, 5, 19, 215, 10, 19, 3, 20, 3, 20, 3, 21, 3, 21, 3, 22, 3,
-	22, 3, 22, 7, 22, 224, 10, 22, 12, 22, 14, 22, 227, 11, 22, 3, 22, 5, 22,
-	230, 10, 22, 3, 23, 3, 23, 3, 23, 7, 23, 235, 10, 23, 12, 23, 14, 23, 238,
-	11, 23, 3, 23, 5, 23, 241, 10, 23, 3, 24, 3, 24, 3, 24, 7, 24, 246, 10,
-	24, 12, 24, 14, 24, 249, 11, 24, 3, 24, 5, 24, 252, 10, 24, 3, 25, 3, 25,
-	3, 25, 7, 25, 257, 10, 25, 12, 25, 14, 25, 260, 11, 25, 3, 25, 5, 25, 263,
-	10, 25, 3, 25, 2, 5, 4, 20, 22, 26, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20,
-	22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 2, 6, 3, 2, 18,
-	23, 3, 2, 11, 12, 3, 2, 16, 17, 3, 2, 6, 9, 2, 282, 2, 50, 3, 2, 2, 2,
-	4, 62, 3, 2, 2, 2, 6, 97, 3, 2, 2, 2, 8, 99, 3, 2, 2, 2, 10, 101, 3, 2,
-	2, 2, 12, 103, 3, 2, 2, 2, 14, 105, 3, 2, 2, 2, 16, 127, 3, 2, 2, 2, 18,
-	129, 3, 2, 2, 2, 20, 131, 3, 2, 2, 2, 22, 145, 3, 2, 2, 2, 24, 167, 3,
-	2, 2, 2, 26, 176, 3, 2, 2, 2, 28, 183, 3, 2, 2, 2, 30, 185, 3, 2, 2, 2,
-	32, 190, 3, 2, 2, 2, 34, 192, 3, 2, 2, 2, 36, 201, 3, 2, 2, 2, 38, 216,
-	3, 2, 2, 2, 40, 218, 3, 2, 2, 2, 42, 220, 3, 2, 2, 2, 44, 231, 3, 2, 2,
-	2, 46, 242, 3, 2, 2, 2, 48, 253, 3, 2, 2, 2, 50, 51, 5, 4, 3, 2, 51, 52,
-	7, 2, 2, 3, 52, 3, 3, 2, 2, 2, 53, 54, 8, 3, 1, 2, 54, 55, 7, 25, 2, 2,
-	55, 56, 5, 4, 3, 2, 56, 57, 7, 26, 2, 2, 57, 63, 3, 2, 2, 2, 58, 59, 7,
-	13, 2, 2, 59, 63, 5, 4, 3, 12, 60, 63, 5, 6, 4, 2, 61, 63, 5, 18, 10, 2,
-	62, 53, 3, 2, 2, 2, 62, 58, 3, 2, 2, 2, 62, 60, 3, 2, 2, 2, 62, 61, 3,
-	2, 2, 2, 63, 91, 3, 2, 2, 2, 64, 65, 12, 7, 2, 2, 65, 66, 5, 8, 5, 2, 66,
-	67, 5, 4, 3, 8, 67, 90, 3, 2, 2, 2, 68, 69, 12, 6, 2, 2, 69, 70, 5, 10,
-	6, 2, 70, 71, 5, 4, 3, 7, 71, 90, 3, 2, 2, 2, 72, 73, 12, 11, 2, 2, 73,
-	74, 7, 15, 2, 2, 74, 90, 5, 16, 9, 2, 75, 76, 12, 10, 2, 2, 76, 77, 7,
-	13, 2, 2, 77, 78, 7, 15, 2, 2, 78, 90, 5, 16, 9, 2, 79, 80, 12, 9, 2, 2,
-	80, 81, 7, 14, 2, 2, 81, 90, 5, 40, 21, 2, 82, 83, 12, 8, 2, 2, 83, 84,
-	7, 14, 2, 2, 84, 85, 7, 13, 2, 2, 85, 90, 5, 40, 21, 2, 86, 87, 12, 5,
-	2, 2, 87, 88, 7, 24, 2, 2, 88, 90, 5, 38, 20, 2, 89, 64, 3, 2, 2, 2, 89,
-	68, 3, 2, 2, 2, 89, 72, 3, 2, 2, 2, 89, 75, 3, 2, 2, 2, 89, 79, 3, 2, 2,
-	2, 89, 82, 3, 2, 2, 2, 89, 86, 3, 2, 2, 2, 90, 93, 3, 2, 2, 2, 91, 89,
-	3, 2, 2, 2, 91, 92, 3, 2, 2, 2, 92, 5, 3, 2, 2, 2, 93, 91, 3, 2, 2, 2,
-	94, 98, 7, 30, 2, 2, 95, 98, 5, 14, 8, 2, 96, 98, 5, 16, 9, 2, 97, 94,
-	3, 2, 2, 2, 97, 95, 3, 2, 2, 2, 97, 96, 3, 2, 2, 2, 98, 7, 3, 2, 2, 2,
-	99, 100, 9, 2, 2, 2, 100, 9, 3, 2, 2, 2, 101, 102, 9, 3, 2, 2, 102, 11,
-	3, 2, 2, 2, 103, 104, 9, 4, 2, 2, 104, 13, 3, 2, 2, 2, 105, 106, 9, 5,
-	2, 2, 106, 15, 3, 2, 2, 2, 107, 109, 7, 3, 2, 2, 108, 110, 5, 44, 23, 2,
-	109, 108, 3, 2, 2, 2, 109, 110, 3, 2, 2, 2, 110, 111, 3, 2, 2, 2, 111,
-	128, 7, 4, 2, 2, 112, 114, 7, 3, 2, 2, 113, 115, 5, 42, 22, 2, 114, 113,
-	3, 2, 2, 2, 114, 115, 3, 2, 2, 2, 115, 116, 3, 2, 2, 2, 116, 128, 7, 4,
-	2, 2, 117, 119, 7, 3, 2, 2, 118, 120, 5, 46, 24, 2, 119, 118, 3, 2, 2,
-	2, 119, 120, 3, 2, 2, 2, 120, 121, 3, 2, 2, 2, 121, 128, 7, 4, 2, 2, 122,
-	124, 7, 3, 2, 2, 123, 125, 5, 48, 25, 2, 124, 123, 3, 2, 2, 2, 124, 125,
-	3, 2, 2, 2, 125, 126, 3, 2, 2, 2, 126, 128, 7, 4, 2, 2, 127, 107, 3, 2,
-	2, 2, 127, 112, 3, 2, 2, 2, 127, 117, 3, 2, 2, 2, 127, 122, 3, 2, 2, 2,
-	128, 17, 3, 2, 2, 2, 129, 130, 5, 20, 11, 2, 130, 19, 3, 2, 2, 2, 131,
-	132, 8, 11, 1, 2, 132, 133, 5, 22, 12, 2, 133, 142, 3, 2, 2, 2, 134, 135,
-	12, 5, 2, 2, 135, 136, 7, 39, 2, 2, 136, 141, 5, 22, 12, 2, 137, 138, 12,
-	4, 2, 2, 138, 139, 7, 40, 2, 2, 139, 141, 5, 22, 12, 2, 140, 134, 3, 2,
-	2, 2, 140, 137, 3, 2, 2, 2, 141, 144, 3, 2, 2, 2, 142, 140, 3, 2, 2, 2,
-	142, 143, 3, 2, 2, 2, 143, 21, 3, 2, 2, 2, 144, 142, 3, 2, 2, 2, 145, 146,
-	8, 12, 1, 2, 146, 147, 5, 24, 13, 2, 147, 159, 3, 2, 2, 2, 148, 149, 12,
-	6, 2, 2, 149, 150, 7, 41, 2, 2, 150, 158, 5, 24, 13, 2, 151, 152, 12, 5,
-	2, 2, 152, 153, 7, 42, 2, 2, 153, 158, 5, 24, 13, 2, 154, 155, 12, 4, 2,
-	2, 155, 156, 7, 43, 2, 2, 156, 158, 5, 24, 13, 2, 157, 148, 3, 2, 2, 2,
-	157, 151, 3, 2, 2, 2, 157, 154, 3, 2, 2, 2, 158, 161, 3, 2, 2, 2, 159,
-	157, 3, 2, 2, 2, 159, 160, 3, 2, 2, 2, 160, 23, 3, 2, 2, 2, 161, 159, 3,
-	2, 2, 2, 162, 163, 5, 26, 14, 2, 163, 164, 7, 46, 2, 2, 164, 165, 5, 26,
-	14, 2, 165, 168, 3, 2, 2, 2, 166, 168, 5, 26, 14, 2, 167, 162, 3, 2, 2,
-	2, 167, 166, 3, 2, 2, 2, 168, 25, 3, 2, 2, 2, 169, 177, 5, 6, 4, 2, 170,
-	177, 5, 28, 15, 2, 171, 172, 7, 25, 2, 2, 172, 173, 5, 20, 11, 2, 173,
-	174, 7, 26, 2, 2, 174, 177, 3, 2, 2, 2, 175, 177, 5, 30, 16, 2, 176, 169,
-	3, 2, 2, 2, 176, 170, 3, 2, 2, 2, 176, 171, 3, 2, 2, 2, 176, 175, 3, 2,
-	2, 2, 177, 27, 3, 2, 2, 2, 178, 179, 5, 36, 19, 2, 179, 180, 7, 45, 2,
-	2, 180, 181, 5, 36, 19, 2, 181, 184, 3, 2, 2, 2, 182, 184, 5, 36, 19, 2,
-	183, 178, 3, 2, 2, 2, 183, 182, 3, 2, 2, 2, 184, 29, 3, 2, 2, 2, 185, 186,
-	5, 32, 17, 2, 186, 187, 7, 25, 2, 2, 187, 188, 5, 34, 18, 2, 188, 189,
-	7, 26, 2, 2, 189, 31, 3, 2, 2, 2, 190, 191, 7, 29, 2, 2, 191, 33, 3, 2,
-	2, 2, 192, 197, 5, 4, 3, 2, 193, 194, 7, 5, 2, 2, 194, 196, 5, 4, 3, 2,
-	195, 193, 3, 2, 2, 2, 196, 199, 3, 2, 2, 2, 197, 195, 3, 2, 2, 2, 197,
-	198, 3, 2, 2, 2, 198, 35, 3, 2, 2, 2, 199, 197, 3, 2, 2, 2, 200, 202, 7,
-	40, 2, 2, 201, 200, 3, 2, 2, 2, 201, 202, 3, 2, 2, 2, 202, 204, 3, 2, 2,
-	2, 203, 205, 7, 48, 2, 2, 204, 203, 3, 2, 2, 2, 205, 206, 3, 2, 2, 2, 206,
-	204, 3, 2, 2, 2, 206, 207, 3, 2, 2, 2, 207, 214, 3, 2, 2, 2, 208, 210,
-	7, 44, 2, 2, 209, 211, 7, 48, 2, 2, 210, 209, 3, 2, 2, 2, 211, 212, 3,
-	2, 2, 2, 212, 210, 3, 2, 2, 2, 212, 213, 3, 2, 2, 2, 213, 215, 3, 2, 2,
-	2, 214, 208, 3, 2, 2, 2, 214, 215, 3, 2, 2, 2, 215, 37, 3, 2, 2, 2, 216,
-	217, 7, 10, 2, 2, 217, 39, 3, 2, 2, 2, 218, 219, 7, 29, 2, 2, 219, 41,
-	3, 2, 2, 2, 220, 225, 7, 9, 2, 2, 221, 222, 7, 5, 2, 2, 222, 224, 7, 9,
-	2, 2, 223, 221, 3, 2, 2, 2, 224, 227, 3, 2, 2, 2, 225, 223, 3, 2, 2, 2,
-	225, 226, 3, 2, 2, 2, 226, 229, 3, 2, 2, 2, 227, 225, 3, 2, 2, 2, 228,
-	230, 7, 5, 2, 2, 229, 228, 3, 2, 2, 2, 229, 230, 3, 2, 2, 2, 230, 43, 3,
-	2, 2, 2, 231, 236, 7, 6, 2, 2, 232, 233, 7, 5, 2, 2, 233, 235, 7, 6, 2,
-	2, 234, 232, 3, 2, 2, 2, 235, 238, 3, 2, 2, 2, 236, 234, 3, 2, 2, 2, 236,
-	237, 3, 2, 2, 2, 237, 240, 3, 2, 2, 2, 238, 236, 3, 2, 2, 2, 239, 241,
-	7, 5, 2, 2, 240, 239, 3, 2, 2, 2, 240, 241, 3, 2, 2, 2, 241, 45, 3, 2,
-	2, 2, 242, 247, 7, 7, 2, 2, 243, 244, 7, 5, 2, 2, 244, 246, 7, 7, 2, 2,
-	245, 243, 3, 2, 2, 2, 246, 249, 3, 2, 2, 2, 247, 245, 3, 2, 2, 2, 247,
-	248, 3, 2, 2, 2, 248, 251, 3, 2, 2, 2, 249, 247, 3, 2, 2, 2, 250, 252,
-	7, 5, 2, 2, 251, 250, 3, 2, 2, 2, 251, 252, 3, 2, 2, 2, 252, 47, 3, 2,
-	2, 2, 253, 258, 7, 8, 2, 2, 254, 255, 7, 5, 2, 2, 255, 257, 7, 8, 2, 2,
-	256, 254, 3, 2, 2, 2, 257, 260, 3, 2, 2, 2, 258, 256, 3, 2, 2, 2, 258,
-	259, 3, 2, 2, 2, 259, 262, 3, 2, 2, 2, 260, 258, 3, 2, 2, 2, 261, 263,
-	7, 5, 2, 2, 262, 261, 3, 2, 2, 2, 262, 263, 3, 2, 2, 2, 263, 49, 3, 2,
-	2, 2, 31, 62, 89, 91, 97, 109, 114, 119, 124, 127, 140, 142, 157, 159,
-	167, 176, 183, 197, 201, 206, 212, 214, 225, 229, 236, 240, 247, 251, 258,
-	262,
+	3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+	3, 3, 3, 7, 3, 94, 10, 3, 12, 3, 14, 3, 97, 11, 3, 3, 4, 3, 4, 3, 4, 5,
+	4, 102, 10, 4, 3, 5, 3, 5, 3, 6, 3, 6, 3, 7, 3, 7, 3, 8, 3, 8, 3, 9, 3,
+	9, 3, 9, 5, 9, 115, 10, 9, 3, 10, 3, 10, 5, 10, 119, 10, 10, 3, 10, 3,
+	10, 3, 10, 5, 10, 124, 10, 10, 3, 10, 3, 10, 3, 10, 5, 10, 129, 10, 10,
+	3, 10, 3, 10, 3, 10, 5, 10, 134, 10, 10, 3, 10, 5, 10, 137, 10, 10, 3,
+	11, 3, 11, 3, 12, 3, 12, 3, 12, 3, 12, 3, 12, 3, 12, 3, 12, 3, 12, 3, 12,
+	3, 12, 3, 12, 3, 12, 7, 12, 153, 10, 12, 12, 12, 14, 12, 156, 11, 12, 3,
+	13, 3, 13, 3, 13, 3, 13, 3, 13, 3, 13, 3, 13, 3, 13, 3, 13, 7, 13, 167,
+	10, 13, 12, 13, 14, 13, 170, 11, 13, 3, 14, 3, 14, 3, 14, 3, 14, 3, 14,
+	3, 14, 3, 14, 3, 14, 3, 14, 7, 14, 181, 10, 14, 12, 14, 14, 14, 184, 11,
+	14, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15,
+	3, 15, 3, 15, 7, 15, 198, 10, 15, 12, 15, 14, 15, 201, 11, 15, 3, 16, 3,
+	16, 3, 16, 3, 16, 3, 16, 3, 16, 3, 16, 5, 16, 210, 10, 16, 3, 17, 3, 17,
+	3, 17, 3, 17, 3, 17, 5, 17, 217, 10, 17, 3, 18, 3, 18, 3, 18, 3, 18, 3,
+	18, 3, 19, 3, 19, 3, 20, 3, 20, 3, 20, 7, 20, 229, 10, 20, 12, 20, 14,
+	20, 232, 11, 20, 3, 21, 5, 21, 235, 10, 21, 3, 21, 6, 21, 238, 10, 21,
+	13, 21, 14, 21, 239, 3, 21, 3, 21, 6, 21, 244, 10, 21, 13, 21, 14, 21,
+	245, 5, 21, 248, 10, 21, 3, 22, 3, 22, 3, 23, 3, 23, 3, 24, 3, 24, 3, 24,
+	7, 24, 257, 10, 24, 12, 24, 14, 24, 260, 11, 24, 3, 24, 5, 24, 263, 10,
+	24, 3, 25, 3, 25, 3, 25, 7, 25, 268, 10, 25, 12, 25, 14, 25, 271, 11, 25,
+	3, 25, 5, 25, 274, 10, 25, 3, 26, 3, 26, 3, 26, 7, 26, 279, 10, 26, 12,
+	26, 14, 26, 282, 11, 26, 3, 26, 5, 26, 285, 10, 26, 3, 27, 3, 27, 3, 27,
+	7, 27, 290, 10, 27, 12, 27, 14, 27, 293, 11, 27, 3, 27, 5, 27, 296, 10,
+	27, 3, 27, 2, 7, 4, 22, 24, 26, 28, 28, 2, 4, 6, 8, 10, 12, 14, 16, 18,
+	20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 2,
+	6, 3, 2, 14, 19, 3, 2, 7, 8, 3, 2, 12, 13, 3, 2, 3, 6, 2, 319, 2, 54, 3,
+	2, 2, 2, 4, 66, 3, 2, 2, 2, 6, 101, 3, 2, 2, 2, 8, 103, 3, 2, 2, 2, 10,
+	105, 3, 2, 2, 2, 12, 107, 3, 2, 2, 2, 14, 109, 3, 2, 2, 2, 16, 114, 3,
+	2, 2, 2, 18, 136, 3, 2, 2, 2, 20, 138, 3, 2, 2, 2, 22, 140, 3, 2, 2, 2,
+	24, 157, 3, 2, 2, 2, 26, 171, 3, 2, 2, 2, 28, 185, 3, 2, 2, 2, 30, 209,
+	3, 2, 2, 2, 32, 216, 3, 2, 2, 2, 34, 218, 3, 2, 2, 2, 36, 223, 3, 2, 2,
+	2, 38, 225, 3, 2, 2, 2, 40, 234, 3, 2, 2, 2, 42, 249, 3, 2, 2, 2, 44, 251,
+	3, 2, 2, 2, 46, 253, 3, 2, 2, 2, 48, 264, 3, 2, 2, 2, 50, 275, 3, 2, 2,
+	2, 52, 286, 3, 2, 2, 2, 54, 55, 5, 4, 3, 2, 55, 56, 7, 2, 2, 3, 56, 3,
+	3, 2, 2, 2, 57, 58, 8, 3, 1, 2, 58, 59, 7, 21, 2, 2, 59, 60, 5, 4, 3, 2,
+	60, 61, 7, 22, 2, 2, 61, 67, 3, 2, 2, 2, 62, 63, 7, 9, 2, 2, 63, 67, 5,
+	4, 3, 12, 64, 67, 5, 6, 4, 2, 65, 67, 5, 20, 11, 2, 66, 57, 3, 2, 2, 2,
+	66, 62, 3, 2, 2, 2, 66, 64, 3, 2, 2, 2, 66, 65, 3, 2, 2, 2, 67, 95, 3,
+	2, 2, 2, 68, 69, 12, 6, 2, 2, 69, 70, 5, 8, 5, 2, 70, 71, 5, 4, 3, 7, 71,
+	94, 3, 2, 2, 2, 72, 73, 12, 5, 2, 2, 73, 74, 5, 10, 6, 2, 74, 75, 5, 4,
+	3, 6, 75, 94, 3, 2, 2, 2, 76, 77, 12, 11, 2, 2, 77, 78, 7, 11, 2, 2, 78,
+	94, 5, 16, 9, 2, 79, 80, 12, 10, 2, 2, 80, 81, 7, 9, 2, 2, 81, 82, 7, 11,
+	2, 2, 82, 94, 5, 16, 9, 2, 83, 84, 12, 9, 2, 2, 84, 85, 7, 20, 2, 2, 85,
+	94, 5, 42, 22, 2, 86, 87, 12, 8, 2, 2, 87, 88, 7, 10, 2, 2, 88, 94, 5,
+	44, 23, 2, 89, 90, 12, 7, 2, 2, 90, 91, 7, 10, 2, 2, 91, 92, 7, 9, 2, 2,
+	92, 94, 5, 44, 23, 2, 93, 68, 3, 2, 2, 2, 93, 72, 3, 2, 2, 2, 93, 76, 3,
+	2, 2, 2, 93, 79, 3, 2, 2, 2, 93, 83, 3, 2, 2, 2, 93, 86, 3, 2, 2, 2, 93,
+	89, 3, 2, 2, 2, 94, 97, 3, 2, 2, 2, 95, 93, 3, 2, 2, 2, 95, 96, 3, 2, 2,
+	2, 96, 5, 3, 2, 2, 2, 97, 95, 3, 2, 2, 2, 98, 102, 7, 26, 2, 2, 99, 102,
+	5, 14, 8, 2, 100, 102, 5, 18, 10, 2, 101, 98, 3, 2, 2, 2, 101, 99, 3, 2,
+	2, 2, 101, 100, 3, 2, 2, 2, 102, 7, 3, 2, 2, 2, 103, 104, 9, 2, 2, 2, 104,
+	9, 3, 2, 2, 2, 105, 106, 9, 3, 2, 2, 106, 11, 3, 2, 2, 2, 107, 108, 9,
+	4, 2, 2, 108, 13, 3, 2, 2, 2, 109, 110, 9, 5, 2, 2, 110, 15, 3, 2, 2, 2,
+	111, 115, 5, 18, 10, 2, 112, 115, 5, 6, 4, 2, 113, 115, 7, 6, 2, 2, 114,
+	111, 3, 2, 2, 2, 114, 112, 3, 2, 2, 2, 114, 113, 3, 2, 2, 2, 115, 17, 3,
+	2, 2, 2, 116, 118, 7, 42, 2, 2, 117, 119, 5, 48, 25, 2, 118, 117, 3, 2,
+	2, 2, 118, 119, 3, 2, 2, 2, 119, 120, 3, 2, 2, 2, 120, 137, 7, 43, 2, 2,
+	121, 123, 7, 42, 2, 2, 122, 124, 5, 46, 24, 2, 123, 122, 3, 2, 2, 2, 123,
+	124, 3, 2, 2, 2, 124, 125, 3, 2, 2, 2, 125, 137, 7, 43, 2, 2, 126, 128,
+	7, 42, 2, 2, 127, 129, 5, 50, 26, 2, 128, 127, 3, 2, 2, 2, 128, 129, 3,
+	2, 2, 2, 129, 130, 3, 2, 2, 2, 130, 137, 7, 43, 2, 2, 131, 133, 7, 42,
+	2, 2, 132, 134, 5, 52, 27, 2, 133, 132, 3, 2, 2, 2, 133, 134, 3, 2, 2,
+	2, 134, 135, 3, 2, 2, 2, 135, 137, 7, 43, 2, 2, 136, 116, 3, 2, 2, 2, 136,
+	121, 3, 2, 2, 2, 136, 126, 3, 2, 2, 2, 136, 131, 3, 2, 2, 2, 137, 19, 3,
+	2, 2, 2, 138, 139, 5, 22, 12, 2, 139, 21, 3, 2, 2, 2, 140, 141, 8, 12,
+	1, 2, 141, 142, 5, 24, 13, 2, 142, 154, 3, 2, 2, 2, 143, 144, 12, 6, 2,
+	2, 144, 145, 7, 36, 2, 2, 145, 153, 5, 24, 13, 2, 146, 147, 12, 5, 2, 2,
+	147, 148, 7, 37, 2, 2, 148, 153, 5, 24, 13, 2, 149, 150, 12, 4, 2, 2, 150,
+	151, 7, 38, 2, 2, 151, 153, 5, 24, 13, 2, 152, 143, 3, 2, 2, 2, 152, 146,
+	3, 2, 2, 2, 152, 149, 3, 2, 2, 2, 153, 156, 3, 2, 2, 2, 154, 152, 3, 2,
+	2, 2, 154, 155, 3, 2, 2, 2, 155, 23, 3, 2, 2, 2, 156, 154, 3, 2, 2, 2,
+	157, 158, 8, 13, 1, 2, 158, 159, 5, 26, 14, 2, 159, 168, 3, 2, 2, 2, 160,
+	161, 12, 5, 2, 2, 161, 162, 7, 34, 2, 2, 162, 167, 5, 26, 14, 2, 163, 164,
+	12, 4, 2, 2, 164, 165, 7, 35, 2, 2, 165, 167, 5, 26, 14, 2, 166, 160, 3,
+	2, 2, 2, 166, 163, 3, 2, 2, 2, 167, 170, 3, 2, 2, 2, 168, 166, 3, 2, 2,
+	2, 168, 169, 3, 2, 2, 2, 169, 25, 3, 2, 2, 2, 170, 168, 3, 2, 2, 2, 171,
+	172, 8, 14, 1, 2, 172, 173, 5, 28, 15, 2, 173, 182, 3, 2, 2, 2, 174, 175,
+	12, 5, 2, 2, 175, 176, 7, 27, 2, 2, 176, 181, 5, 28, 15, 2, 177, 178, 12,
+	4, 2, 2, 178, 179, 7, 28, 2, 2, 179, 181, 5, 28, 15, 2, 180, 174, 3, 2,
+	2, 2, 180, 177, 3, 2, 2, 2, 181, 184, 3, 2, 2, 2, 182, 180, 3, 2, 2, 2,
+	182, 183, 3, 2, 2, 2, 183, 27, 3, 2, 2, 2, 184, 182, 3, 2, 2, 2, 185, 186,
+	8, 15, 1, 2, 186, 187, 5, 30, 16, 2, 187, 199, 3, 2, 2, 2, 188, 189, 12,
+	6, 2, 2, 189, 190, 7, 29, 2, 2, 190, 198, 5, 30, 16, 2, 191, 192, 12, 5,
+	2, 2, 192, 193, 7, 30, 2, 2, 193, 198, 5, 30, 16, 2, 194, 195, 12, 4, 2,
+	2, 195, 196, 7, 31, 2, 2, 196, 198, 5, 30, 16, 2, 197, 188, 3, 2, 2, 2,
+	197, 191, 3, 2, 2, 2, 197, 194, 3, 2, 2, 2, 198, 201, 3, 2, 2, 2, 199,
+	197, 3, 2, 2, 2, 199, 200, 3, 2, 2, 2, 200, 29, 3, 2, 2, 2, 201, 199, 3,
+	2, 2, 2, 202, 210, 5, 6, 4, 2, 203, 210, 5, 32, 17, 2, 204, 205, 7, 21,
+	2, 2, 205, 206, 5, 22, 12, 2, 206, 207, 7, 22, 2, 2, 207, 210, 3, 2, 2,
+	2, 208, 210, 5, 34, 18, 2, 209, 202, 3, 2, 2, 2, 209, 203, 3, 2, 2, 2,
+	209, 204, 3, 2, 2, 2, 209, 208, 3, 2, 2, 2, 210, 31, 3, 2, 2, 2, 211, 212,
+	5, 40, 21, 2, 212, 213, 7, 33, 2, 2, 213, 214, 5, 40, 21, 2, 214, 217,
+	3, 2, 2, 2, 215, 217, 5, 40, 21, 2, 216, 211, 3, 2, 2, 2, 216, 215, 3,
+	2, 2, 2, 217, 33, 3, 2, 2, 2, 218, 219, 5, 36, 19, 2, 219, 220, 7, 21,
+	2, 2, 220, 221, 5, 38, 20, 2, 221, 222, 7, 22, 2, 2, 222, 35, 3, 2, 2,
+	2, 223, 224, 7, 25, 2, 2, 224, 37, 3, 2, 2, 2, 225, 230, 5, 4, 3, 2, 226,
+	227, 7, 41, 2, 2, 227, 229, 5, 4, 3, 2, 228, 226, 3, 2, 2, 2, 229, 232,
+	3, 2, 2, 2, 230, 228, 3, 2, 2, 2, 230, 231, 3, 2, 2, 2, 231, 39, 3, 2,
+	2, 2, 232, 230, 3, 2, 2, 2, 233, 235, 7, 28, 2, 2, 234, 233, 3, 2, 2, 2,
+	234, 235, 3, 2, 2, 2, 235, 237, 3, 2, 2, 2, 236, 238, 7, 40, 2, 2, 237,
+	236, 3, 2, 2, 2, 238, 239, 3, 2, 2, 2, 239, 237, 3, 2, 2, 2, 239, 240,
+	3, 2, 2, 2, 240, 247, 3, 2, 2, 2, 241, 243, 7, 32, 2, 2, 242, 244, 7, 40,
+	2, 2, 243, 242, 3, 2, 2, 2, 244, 245, 3, 2, 2, 2, 245, 243, 3, 2, 2, 2,
+	245, 246, 3, 2, 2, 2, 246, 248, 3, 2, 2, 2, 247, 241, 3, 2, 2, 2, 247,
+	248, 3, 2, 2, 2, 248, 41, 3, 2, 2, 2, 249, 250, 7, 46, 2, 2, 250, 43, 3,
+	2, 2, 2, 251, 252, 7, 25, 2, 2, 252, 45, 3, 2, 2, 2, 253, 258, 7, 6, 2,
+	2, 254, 255, 7, 41, 2, 2, 255, 257, 7, 6, 2, 2, 256, 254, 3, 2, 2, 2, 257,
+	260, 3, 2, 2, 2, 258, 256, 3, 2, 2, 2, 258, 259, 3, 2, 2, 2, 259, 262,
+	3, 2, 2, 2, 260, 258, 3, 2, 2, 2, 261, 263, 7, 41, 2, 2, 262, 261, 3, 2,
+	2, 2, 262, 263, 3, 2, 2, 2, 263, 47, 3, 2, 2, 2, 264, 269, 7, 3, 2, 2,
+	265, 266, 7, 41, 2, 2, 266, 268, 7, 3, 2, 2, 267, 265, 3, 2, 2, 2, 268,
+	271, 3, 2, 2, 2, 269, 267, 3, 2, 2, 2, 269, 270, 3, 2, 2, 2, 270, 273,
+	3, 2, 2, 2, 271, 269, 3, 2, 2, 2, 272, 274, 7, 41, 2, 2, 273, 272, 3, 2,
+	2, 2, 273, 274, 3, 2, 2, 2, 274, 49, 3, 2, 2, 2, 275, 280, 7, 4, 2, 2,
+	276, 277, 7, 41, 2, 2, 277, 279, 7, 4, 2, 2, 278, 276, 3, 2, 2, 2, 279,
+	282, 3, 2, 2, 2, 280, 278, 3, 2, 2, 2, 280, 281, 3, 2, 2, 2, 281, 284,
+	3, 2, 2, 2, 282, 280, 3, 2, 2, 2, 283, 285, 7, 41, 2, 2, 284, 283, 3, 2,
+	2, 2, 284, 285, 3, 2, 2, 2, 285, 51, 3, 2, 2, 2, 286, 291, 7, 5, 2, 2,
+	287, 288, 7, 41, 2, 2, 288, 290, 7, 5, 2, 2, 289, 287, 3, 2, 2, 2, 290,
+	293, 3, 2, 2, 2, 291, 289, 3, 2, 2, 2, 291, 292, 3, 2, 2, 2, 292, 295,
+	3, 2, 2, 2, 293, 291, 3, 2, 2, 2, 294, 296, 7, 41, 2, 2, 295, 294, 3, 2,
+	2, 2, 295, 296, 3, 2, 2, 2, 296, 53, 3, 2, 2, 2, 35, 66, 93, 95, 101, 114,
+	118, 123, 128, 133, 136, 152, 154, 166, 168, 180, 182, 197, 199, 209, 216,
+	230, 234, 239, 245, 247, 258, 262, 269, 273, 280, 284, 291, 295,
 }
 var deserializer = antlr.NewATNDeserializer(nil)
 var deserializedATN = deserializer.DeserializeFromUInt16(parserATN)
 
 var literalNames = []string{
-	"", "'['", "']'", "','", "", "", "", "", "", "'&&'", "'||'", "'not'", "'is'",
-	"'in'", "'true'", "'false'", "'>'", "'>='", "'<'", "'<='", "'=='", "'!='",
-	"'=~'", "'('", "')'", "", "", "", "", "'cos'", "'sin'", "'tan'", "'acos'",
-	"'asin'", "'atan'", "'ln'", "'log'", "'+'", "'-'", "'*'", "'/'", "'%'",
-	"'.'", "", "'^'", "'\n'",
+	"", "", "", "", "", "'&&'", "'||'", "'not'", "'is'", "'in'", "'true'",
+	"'false'", "'>'", "'>='", "'<'", "'<='", "'=='", "'!='", "'=~'", "'('",
+	"')'", "", "", "", "", "'+'", "'-'", "'*'", "", "'%'", "'.'", "", "'<<'",
+	"'>>'", "'&'", "'^'", "'|'", "'\n'", "", "','", "'['", "']'",
 }
 var symbolicNames = []string{
-	"", "", "", "", "Integer", "Float", "Boolean", "Varchar", "Regex", "AND",
-	"OR", "NOT", "IS", "IN", "TRUE", "FALSE", "GT", "GE", "LT", "LE", "EQ",
-	"NE", "MATCH", "LPAREN", "RPAREN", "INT", "FLOAT", "IDENTIFIER", "VARIABLE",
-	"COS", "SIN", "TAN", "ACOS", "ASIN", "ATAN", "LN", "LOG", "PLUS", "MINUS",
-	"MUL", "DIV", "MOD", "POINT", "E", "POW", "NL", "DIGIT", "WS",
+	"", "Integer", "Float", "Boolean", "Varchar", "AND", "OR", "NOT", "IS",
+	"IN", "TRUE", "FALSE", "GT", "GE", "LT", "LE", "EQ", "NE", "MATCH", "LPAREN",
+	"RPAREN", "INT", "FLOAT", "IDENTIFIER", "VARIABLE", "PLUS", "MINUS", "MUL",
+	"DIV", "MOD", "POINT", "E", "LSHIFT", "RSHIFT", "BAND", "BEOR", "BIOR",
+	"NL", "DIGIT", "COMMA", "LBRACKET", "RBRACKET", "WS", "SLASH", "REGEX",
 }
 
 var ruleNames = []string{
 	"parse", "expression", "variable", "comparator", "binary", "boolean", "literal",
-	"array", "calc", "plus", "multiplying", "pow", "atom", "scientific", "function",
-	"funcname", "parameters", "number", "regex", "kind", "strings", "integers",
-	"floats", "booleans",
+	"container", "array", "calc", "bit", "shift", "plus", "multiplying", "atom",
+	"scientific", "function", "funcname", "parameters", "number", "regex",
+	"kind", "strings", "integers", "floats", "booleans",
 }
 var decisionToDFA = make([]*antlr.DFA, len(deserializedATN.DecisionToState))
 
@@ -179,7 +193,7 @@ func NewTExprParser(input antlr.TokenStream) *TExprParser {
 	this.RuleNames = ruleNames
 	this.LiteralNames = literalNames
 	this.SymbolicNames = symbolicNames
-	this.GrammarFileName = "TExpr.g4"
+	this.GrammarFileName = "TExprParser.g4"
 
 	return this
 }
@@ -187,53 +201,50 @@ func NewTExprParser(input antlr.TokenStream) *TExprParser {
 // TExprParser tokens.
 const (
 	TExprParserEOF        = antlr.TokenEOF
-	TExprParserT__0       = 1
-	TExprParserT__1       = 2
-	TExprParserT__2       = 3
-	TExprParserInteger    = 4
-	TExprParserFloat      = 5
-	TExprParserBoolean    = 6
-	TExprParserVarchar    = 7
-	TExprParserRegex      = 8
-	TExprParserAND        = 9
-	TExprParserOR         = 10
-	TExprParserNOT        = 11
-	TExprParserIS         = 12
-	TExprParserIN         = 13
-	TExprParserTRUE       = 14
-	TExprParserFALSE      = 15
-	TExprParserGT         = 16
-	TExprParserGE         = 17
-	TExprParserLT         = 18
-	TExprParserLE         = 19
-	TExprParserEQ         = 20
-	TExprParserNE         = 21
-	TExprParserMATCH      = 22
-	TExprParserLPAREN     = 23
-	TExprParserRPAREN     = 24
-	TExprParserINT        = 25
-	TExprParserFLOAT      = 26
-	TExprParserIDENTIFIER = 27
-	TExprParserVARIABLE   = 28
-	TExprParserCOS        = 29
-	TExprParserSIN        = 30
-	TExprParserTAN        = 31
-	TExprParserACOS       = 32
-	TExprParserASIN       = 33
-	TExprParserATAN       = 34
-	TExprParserLN         = 35
-	TExprParserLOG        = 36
-	TExprParserPLUS       = 37
-	TExprParserMINUS      = 38
-	TExprParserMUL        = 39
-	TExprParserDIV        = 40
-	TExprParserMOD        = 41
-	TExprParserPOINT      = 42
-	TExprParserE          = 43
-	TExprParserPOW        = 44
-	TExprParserNL         = 45
-	TExprParserDIGIT      = 46
-	TExprParserWS         = 47
+	TExprParserInteger    = 1
+	TExprParserFloat      = 2
+	TExprParserBoolean    = 3
+	TExprParserVarchar    = 4
+	TExprParserAND        = 5
+	TExprParserOR         = 6
+	TExprParserNOT        = 7
+	TExprParserIS         = 8
+	TExprParserIN         = 9
+	TExprParserTRUE       = 10
+	TExprParserFALSE      = 11
+	TExprParserGT         = 12
+	TExprParserGE         = 13
+	TExprParserLT         = 14
+	TExprParserLE         = 15
+	TExprParserEQ         = 16
+	TExprParserNE         = 17
+	TExprParserMATCH      = 18
+	TExprParserLPAREN     = 19
+	TExprParserRPAREN     = 20
+	TExprParserINT        = 21
+	TExprParserFLOAT      = 22
+	TExprParserIDENTIFIER = 23
+	TExprParserVARIABLE   = 24
+	TExprParserPLUS       = 25
+	TExprParserMINUS      = 26
+	TExprParserMUL        = 27
+	TExprParserDIV        = 28
+	TExprParserMOD        = 29
+	TExprParserPOINT      = 30
+	TExprParserE          = 31
+	TExprParserLSHIFT     = 32
+	TExprParserRSHIFT     = 33
+	TExprParserBAND       = 34
+	TExprParserBEOR       = 35
+	TExprParserBIOR       = 36
+	TExprParserNL         = 37
+	TExprParserDIGIT      = 38
+	TExprParserCOMMA      = 39
+	TExprParserLBRACKET   = 40
+	TExprParserRBRACKET   = 41
+	TExprParserWS         = 42
+	TExprParserSLASH      = 43
+	TExprParserREGEX      = 44
 )
 
 // TExprParser rules.
@@ -245,23 +256,25 @@ const (
 	TExprParserRULE_binary      = 4
 	TExprParserRULE_boolean     = 5
 	TExprParserRULE_literal     = 6
-	TExprParserRULE_array       = 7
-	TExprParserRULE_calc        = 8
-	TExprParserRULE_plus        = 9
-	TExprParserRULE_multiplying = 10
-	TExprParserRULE_pow         = 11
-	TExprParserRULE_atom        = 12
-	TExprParserRULE_scientific  = 13
-	TExprParserRULE_function    = 14
-	TExprParserRULE_funcname    = 15
-	TExprParserRULE_parameters  = 16
-	TExprParserRULE_number      = 17
-	TExprParserRULE_regex       = 18
-	TExprParserRULE_kind        = 19
-	TExprParserRULE_strings     = 20
-	TExprParserRULE_integers    = 21
-	TExprParserRULE_floats      = 22
-	TExprParserRULE_booleans    = 23
+	TExprParserRULE_container   = 7
+	TExprParserRULE_array       = 8
+	TExprParserRULE_calc        = 9
+	TExprParserRULE_bit         = 10
+	TExprParserRULE_shift       = 11
+	TExprParserRULE_plus        = 12
+	TExprParserRULE_multiplying = 13
+	TExprParserRULE_atom        = 14
+	TExprParserRULE_scientific  = 15
+	TExprParserRULE_function    = 16
+	TExprParserRULE_funcname    = 17
+	TExprParserRULE_parameters  = 18
+	TExprParserRULE_number      = 19
+	TExprParserRULE_regex       = 20
+	TExprParserRULE_kind        = 21
+	TExprParserRULE_strings     = 22
+	TExprParserRULE_integers    = 23
+	TExprParserRULE_floats      = 24
+	TExprParserRULE_booleans    = 25
 )
 
 // IParseContext is an interface to support dynamic dispatch.
@@ -326,7 +339,7 @@ func (s *ParseContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) 
 
 func (s *ParseContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitParse(s)
 
 	default:
@@ -356,11 +369,11 @@ func (p *TExprParser) Parse() (localctx IParseContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(48)
+		p.SetState(52)
 		p.expression(0)
 	}
 	{
-		p.SetState(49)
+		p.SetState(53)
 		p.Match(TExprParserEOF)
 	}
 
@@ -470,7 +483,7 @@ func (s *BinaryExpressionContext) Binary() IBinaryContext {
 
 func (s *BinaryExpressionContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitBinaryExpression(s)
 
 	default:
@@ -522,7 +535,7 @@ func (s *MatchExpressionContext) Regex() IRegexContext {
 
 func (s *MatchExpressionContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitMatchExpression(s)
 
 	default:
@@ -562,19 +575,19 @@ func (s *InExpressionContext) IN() antlr.TerminalNode {
 	return s.GetToken(TExprParserIN, 0)
 }
 
-func (s *InExpressionContext) Array() IArrayContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IArrayContext)(nil)).Elem(), 0)
+func (s *InExpressionContext) Container() IContainerContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IContainerContext)(nil)).Elem(), 0)
 
 	if t == nil {
 		return nil
 	}
 
-	return t.(IArrayContext)
+	return t.(IContainerContext)
 }
 
 func (s *InExpressionContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitInExpression(s)
 
 	default:
@@ -626,7 +639,7 @@ func (s *IsTypeExpressionContext) Kind() IKindContext {
 
 func (s *IsTypeExpressionContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitIsTypeExpression(s)
 
 	default:
@@ -664,7 +677,7 @@ func (s *CalcExpressionContext) Calc() ICalcContext {
 
 func (s *CalcExpressionContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitCalcExpression(s)
 
 	default:
@@ -720,7 +733,7 @@ func (s *IsNotTypeExpressionContext) Kind() IKindContext {
 
 func (s *IsNotTypeExpressionContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitIsNotTypeExpression(s)
 
 	default:
@@ -762,7 +775,7 @@ func (s *NotExpressionContext) Expression() IExpressionContext {
 
 func (s *NotExpressionContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitNotExpression(s)
 
 	default:
@@ -808,7 +821,7 @@ func (s *ParenExpressionContext) RPAREN() antlr.TerminalNode {
 
 func (s *ParenExpressionContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitParenExpression(s)
 
 	default:
@@ -852,19 +865,19 @@ func (s *NotInExpressionContext) IN() antlr.TerminalNode {
 	return s.GetToken(TExprParserIN, 0)
 }
 
-func (s *NotInExpressionContext) Array() IArrayContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IArrayContext)(nil)).Elem(), 0)
+func (s *NotInExpressionContext) Container() IContainerContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IContainerContext)(nil)).Elem(), 0)
 
 	if t == nil {
 		return nil
 	}
 
-	return t.(IArrayContext)
+	return t.(IContainerContext)
 }
 
 func (s *NotInExpressionContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitNotInExpression(s)
 
 	default:
@@ -925,7 +938,7 @@ func (s *ComparatorExpressionContext) Comparator() IComparatorContext {
 
 func (s *ComparatorExpressionContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitComparatorExpression(s)
 
 	default:
@@ -963,7 +976,7 @@ func (s *VariableExpressionContext) Variable() IVariableContext {
 
 func (s *VariableExpressionContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitVariableExpression(s)
 
 	default:
@@ -1003,7 +1016,7 @@ func (p *TExprParser) expression(_p int) (localctx IExpressionContext) {
 	var _alt int
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(60)
+	p.SetState(64)
 	p.GetErrorHandler().Sync(p)
 	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 0, p.GetParserRuleContext()) {
 	case 1:
@@ -1012,15 +1025,15 @@ func (p *TExprParser) expression(_p int) (localctx IExpressionContext) {
 		_prevctx = localctx
 
 		{
-			p.SetState(52)
+			p.SetState(56)
 			p.Match(TExprParserLPAREN)
 		}
 		{
-			p.SetState(53)
+			p.SetState(57)
 			p.expression(0)
 		}
 		{
-			p.SetState(54)
+			p.SetState(58)
 			p.Match(TExprParserRPAREN)
 		}
 
@@ -1029,11 +1042,11 @@ func (p *TExprParser) expression(_p int) (localctx IExpressionContext) {
 		p.SetParserRuleContext(localctx)
 		_prevctx = localctx
 		{
-			p.SetState(56)
+			p.SetState(60)
 			p.Match(TExprParserNOT)
 		}
 		{
-			p.SetState(57)
+			p.SetState(61)
 			p.expression(10)
 		}
 
@@ -1042,7 +1055,7 @@ func (p *TExprParser) expression(_p int) (localctx IExpressionContext) {
 		p.SetParserRuleContext(localctx)
 		_prevctx = localctx
 		{
-			p.SetState(58)
+			p.SetState(62)
 			p.Variable()
 		}
 
@@ -1051,13 +1064,13 @@ func (p *TExprParser) expression(_p int) (localctx IExpressionContext) {
 		p.SetParserRuleContext(localctx)
 		_prevctx = localctx
 		{
-			p.SetState(59)
+			p.SetState(63)
 			p.Calc()
 		}
 
 	}
 	p.GetParserRuleContext().SetStop(p.GetTokenStream().LT(-1))
-	p.SetState(89)
+	p.SetState(93)
 	p.GetErrorHandler().Sync(p)
 	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 2, p.GetParserRuleContext())
 
@@ -1067,28 +1080,11 @@ func (p *TExprParser) expression(_p int) (localctx IExpressionContext) {
 				p.TriggerExitRuleEvent()
 			}
 			_prevctx = localctx
-			p.SetState(87)
+			p.SetState(91)
 			p.GetErrorHandler().Sync(p)
 			switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 1, p.GetParserRuleContext()) {
 			case 1:
 				localctx = NewComparatorExpressionContext(p, NewExpressionContext(p, _parentctx, _parentState))
-				p.PushNewRecursionContext(localctx, _startState, TExprParserRULE_expression)
-				p.SetState(62)
-
-				if !(p.Precpred(p.GetParserRuleContext(), 5)) {
-					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 5)", ""))
-				}
-				{
-					p.SetState(63)
-					p.Comparator()
-				}
-				{
-					p.SetState(64)
-					p.expression(6)
-				}
-
-			case 2:
-				localctx = NewBinaryExpressionContext(p, NewExpressionContext(p, _parentctx, _parentState))
 				p.PushNewRecursionContext(localctx, _startState, TExprParserRULE_expression)
 				p.SetState(66)
 
@@ -1097,41 +1093,37 @@ func (p *TExprParser) expression(_p int) (localctx IExpressionContext) {
 				}
 				{
 					p.SetState(67)
-					p.Binary()
+					p.Comparator()
 				}
 				{
 					p.SetState(68)
 					p.expression(5)
 				}
 
-			case 3:
-				localctx = NewInExpressionContext(p, NewExpressionContext(p, _parentctx, _parentState))
+			case 2:
+				localctx = NewBinaryExpressionContext(p, NewExpressionContext(p, _parentctx, _parentState))
 				p.PushNewRecursionContext(localctx, _startState, TExprParserRULE_expression)
 				p.SetState(70)
 
-				if !(p.Precpred(p.GetParserRuleContext(), 9)) {
-					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 9)", ""))
+				if !(p.Precpred(p.GetParserRuleContext(), 3)) {
+					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 3)", ""))
 				}
 				{
 					p.SetState(71)
-					p.Match(TExprParserIN)
+					p.Binary()
 				}
 				{
 					p.SetState(72)
-					p.Array()
+					p.expression(4)
 				}
 
-			case 4:
-				localctx = NewNotInExpressionContext(p, NewExpressionContext(p, _parentctx, _parentState))
+			case 3:
+				localctx = NewInExpressionContext(p, NewExpressionContext(p, _parentctx, _parentState))
 				p.PushNewRecursionContext(localctx, _startState, TExprParserRULE_expression)
-				p.SetState(73)
+				p.SetState(74)
 
-				if !(p.Precpred(p.GetParserRuleContext(), 8)) {
-					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 8)", ""))
-				}
-				{
-					p.SetState(74)
-					p.Match(TExprParserNOT)
+				if !(p.Precpred(p.GetParserRuleContext(), 9)) {
+					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 9)", ""))
 				}
 				{
 					p.SetState(75)
@@ -1139,68 +1131,89 @@ func (p *TExprParser) expression(_p int) (localctx IExpressionContext) {
 				}
 				{
 					p.SetState(76)
-					p.Array()
+					p.Container()
+				}
+
+			case 4:
+				localctx = NewNotInExpressionContext(p, NewExpressionContext(p, _parentctx, _parentState))
+				p.PushNewRecursionContext(localctx, _startState, TExprParserRULE_expression)
+				p.SetState(77)
+
+				if !(p.Precpred(p.GetParserRuleContext(), 8)) {
+					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 8)", ""))
+				}
+				{
+					p.SetState(78)
+					p.Match(TExprParserNOT)
+				}
+				{
+					p.SetState(79)
+					p.Match(TExprParserIN)
+				}
+				{
+					p.SetState(80)
+					p.Container()
 				}
 
 			case 5:
-				localctx = NewIsTypeExpressionContext(p, NewExpressionContext(p, _parentctx, _parentState))
+				localctx = NewMatchExpressionContext(p, NewExpressionContext(p, _parentctx, _parentState))
 				p.PushNewRecursionContext(localctx, _startState, TExprParserRULE_expression)
-				p.SetState(77)
+				p.SetState(81)
 
 				if !(p.Precpred(p.GetParserRuleContext(), 7)) {
 					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 7)", ""))
 				}
 				{
-					p.SetState(78)
-					p.Match(TExprParserIS)
+					p.SetState(82)
+					p.Match(TExprParserMATCH)
 				}
 				{
-					p.SetState(79)
-					p.Kind()
+					p.SetState(83)
+					p.Regex()
 				}
 
 			case 6:
-				localctx = NewIsNotTypeExpressionContext(p, NewExpressionContext(p, _parentctx, _parentState))
+				localctx = NewIsTypeExpressionContext(p, NewExpressionContext(p, _parentctx, _parentState))
 				p.PushNewRecursionContext(localctx, _startState, TExprParserRULE_expression)
-				p.SetState(80)
+				p.SetState(84)
 
 				if !(p.Precpred(p.GetParserRuleContext(), 6)) {
 					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 6)", ""))
 				}
 				{
-					p.SetState(81)
+					p.SetState(85)
 					p.Match(TExprParserIS)
 				}
 				{
-					p.SetState(82)
-					p.Match(TExprParserNOT)
-				}
-				{
-					p.SetState(83)
+					p.SetState(86)
 					p.Kind()
 				}
 
 			case 7:
-				localctx = NewMatchExpressionContext(p, NewExpressionContext(p, _parentctx, _parentState))
+				localctx = NewIsNotTypeExpressionContext(p, NewExpressionContext(p, _parentctx, _parentState))
 				p.PushNewRecursionContext(localctx, _startState, TExprParserRULE_expression)
-				p.SetState(84)
+				p.SetState(87)
 
-				if !(p.Precpred(p.GetParserRuleContext(), 3)) {
-					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 3)", ""))
+				if !(p.Precpred(p.GetParserRuleContext(), 5)) {
+					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 5)", ""))
 				}
 				{
-					p.SetState(85)
-					p.Match(TExprParserMATCH)
+					p.SetState(88)
+					p.Match(TExprParserIS)
 				}
 				{
-					p.SetState(86)
-					p.Regex()
+					p.SetState(89)
+					p.Match(TExprParserNOT)
+				}
+				{
+					p.SetState(90)
+					p.Kind()
 				}
 
 			}
 
 		}
-		p.SetState(91)
+		p.SetState(95)
 		p.GetErrorHandler().Sync(p)
 		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 2, p.GetParserRuleContext())
 	}
@@ -1280,7 +1293,7 @@ func (s *VariableContext) ToStringTree(ruleNames []string, recog antlr.Recognize
 
 func (s *VariableContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitVariable(s)
 
 	default:
@@ -1308,28 +1321,28 @@ func (p *TExprParser) Variable() (localctx IVariableContext) {
 		}
 	}()
 
-	p.SetState(95)
+	p.SetState(99)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
 	case TExprParserVARIABLE:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(92)
+			p.SetState(96)
 			p.Match(TExprParserVARIABLE)
 		}
 
 	case TExprParserInteger, TExprParserFloat, TExprParserBoolean, TExprParserVarchar:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(93)
+			p.SetState(97)
 			p.Literal()
 		}
 
-	case TExprParserT__0:
+	case TExprParserLBRACKET:
 		p.EnterOuterAlt(localctx, 3)
 		{
-			p.SetState(94)
+			p.SetState(98)
 			p.Array()
 		}
 
@@ -1412,7 +1425,7 @@ func (s *ComparatorContext) ToStringTree(ruleNames []string, recog antlr.Recogni
 
 func (s *ComparatorContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitComparator(s)
 
 	default:
@@ -1443,7 +1456,7 @@ func (p *TExprParser) Comparator() (localctx IComparatorContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(97)
+		p.SetState(101)
 		_la = p.GetTokenStream().LA(1)
 
 		if !(((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<TExprParserGT)|(1<<TExprParserGE)|(1<<TExprParserLT)|(1<<TExprParserLE)|(1<<TExprParserEQ)|(1<<TExprParserNE))) != 0) {
@@ -1513,7 +1526,7 @@ func (s *BinaryContext) ToStringTree(ruleNames []string, recog antlr.Recognizer)
 
 func (s *BinaryContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitBinary(s)
 
 	default:
@@ -1544,7 +1557,7 @@ func (p *TExprParser) Binary() (localctx IBinaryContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(99)
+		p.SetState(103)
 		_la = p.GetTokenStream().LA(1)
 
 		if !(_la == TExprParserAND || _la == TExprParserOR) {
@@ -1614,7 +1627,7 @@ func (s *BooleanContext) ToStringTree(ruleNames []string, recog antlr.Recognizer
 
 func (s *BooleanContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitBoolean(s)
 
 	default:
@@ -1645,7 +1658,7 @@ func (p *TExprParser) Boolean() (localctx IBooleanContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(101)
+		p.SetState(105)
 		_la = p.GetTokenStream().LA(1)
 
 		if !(_la == TExprParserTRUE || _la == TExprParserFALSE) {
@@ -1723,7 +1736,7 @@ func (s *LiteralContext) ToStringTree(ruleNames []string, recog antlr.Recognizer
 
 func (s *LiteralContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitLiteral(s)
 
 	default:
@@ -1754,7 +1767,7 @@ func (p *TExprParser) Literal() (localctx ILiteralContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(103)
+		p.SetState(107)
 		_la = p.GetTokenStream().LA(1)
 
 		if !(((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<TExprParserInteger)|(1<<TExprParserFloat)|(1<<TExprParserBoolean)|(1<<TExprParserVarchar))) != 0) {
@@ -1763,6 +1776,135 @@ func (p *TExprParser) Literal() (localctx ILiteralContext) {
 			p.GetErrorHandler().ReportMatch(p)
 			p.Consume()
 		}
+	}
+
+	return localctx
+}
+
+// IContainerContext is an interface to support dynamic dispatch.
+type IContainerContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// IsContainerContext differentiates from other interfaces.
+	IsContainerContext()
+}
+
+type ContainerContext struct {
+	*antlr.BaseParserRuleContext
+	parser antlr.Parser
+}
+
+func NewEmptyContainerContext() *ContainerContext {
+	var p = new(ContainerContext)
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	p.RuleIndex = TExprParserRULE_container
+	return p
+}
+
+func (*ContainerContext) IsContainerContext() {}
+
+func NewContainerContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *ContainerContext {
+	var p = new(ContainerContext)
+
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = TExprParserRULE_container
+
+	return p
+}
+
+func (s *ContainerContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *ContainerContext) Array() IArrayContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IArrayContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IArrayContext)
+}
+
+func (s *ContainerContext) Variable() IVariableContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IVariableContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IVariableContext)
+}
+
+func (s *ContainerContext) Varchar() antlr.TerminalNode {
+	return s.GetToken(TExprParserVarchar, 0)
+}
+
+func (s *ContainerContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *ContainerContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *ContainerContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case TExprParserVisitor:
+		return t.VisitContainer(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+func (p *TExprParser) Container() (localctx IContainerContext) {
+	localctx = NewContainerContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 14, TExprParserRULE_container)
+
+	defer func() {
+		p.ExitRule()
+	}()
+
+	defer func() {
+		if err := recover(); err != nil {
+			if v, ok := err.(antlr.RecognitionException); ok {
+				localctx.SetException(v)
+				p.GetErrorHandler().ReportError(p, v)
+				p.GetErrorHandler().Recover(p, v)
+			} else {
+				panic(err)
+			}
+		}
+	}()
+
+	p.SetState(112)
+	p.GetErrorHandler().Sync(p)
+	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 4, p.GetParserRuleContext()) {
+	case 1:
+		p.EnterOuterAlt(localctx, 1)
+		{
+			p.SetState(109)
+			p.Array()
+		}
+
+	case 2:
+		p.EnterOuterAlt(localctx, 2)
+		{
+			p.SetState(110)
+			p.Variable()
+		}
+
+	case 3:
+		p.EnterOuterAlt(localctx, 3)
+		{
+			p.SetState(111)
+			p.Match(TExprParserVarchar)
+		}
+
 	}
 
 	return localctx
@@ -1805,6 +1947,14 @@ func NewArrayContext(parser antlr.Parser, parent antlr.ParserRuleContext, invoki
 }
 
 func (s *ArrayContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *ArrayContext) LBRACKET() antlr.TerminalNode {
+	return s.GetToken(TExprParserLBRACKET, 0)
+}
+
+func (s *ArrayContext) RBRACKET() antlr.TerminalNode {
+	return s.GetToken(TExprParserRBRACKET, 0)
+}
 
 func (s *ArrayContext) Integers() IIntegersContext {
 	var t = s.GetTypedRuleContext(reflect.TypeOf((*IIntegersContext)(nil)).Elem(), 0)
@@ -1856,7 +2006,7 @@ func (s *ArrayContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) 
 
 func (s *ArrayContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitArray(s)
 
 	default:
@@ -1866,7 +2016,7 @@ func (s *ArrayContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 
 func (p *TExprParser) Array() (localctx IArrayContext) {
 	localctx = NewArrayContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 14, TExprParserRULE_array)
+	p.EnterRule(localctx, 16, TExprParserRULE_array)
 	var _la int
 
 	defer func() {
@@ -1885,95 +2035,95 @@ func (p *TExprParser) Array() (localctx IArrayContext) {
 		}
 	}()
 
-	p.SetState(125)
+	p.SetState(134)
 	p.GetErrorHandler().Sync(p)
-	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 8, p.GetParserRuleContext()) {
+	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 9, p.GetParserRuleContext()) {
 	case 1:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(105)
-			p.Match(TExprParserT__0)
+			p.SetState(114)
+			p.Match(TExprParserLBRACKET)
 		}
-		p.SetState(107)
+		p.SetState(116)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 
 		if _la == TExprParserInteger {
 			{
-				p.SetState(106)
+				p.SetState(115)
 				p.Integers()
 			}
 
 		}
 		{
-			p.SetState(109)
-			p.Match(TExprParserT__1)
+			p.SetState(118)
+			p.Match(TExprParserRBRACKET)
 		}
 
 	case 2:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(110)
-			p.Match(TExprParserT__0)
+			p.SetState(119)
+			p.Match(TExprParserLBRACKET)
 		}
-		p.SetState(112)
+		p.SetState(121)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 
 		if _la == TExprParserVarchar {
 			{
-				p.SetState(111)
+				p.SetState(120)
 				p.Strings()
 			}
 
 		}
 		{
-			p.SetState(114)
-			p.Match(TExprParserT__1)
+			p.SetState(123)
+			p.Match(TExprParserRBRACKET)
 		}
 
 	case 3:
 		p.EnterOuterAlt(localctx, 3)
 		{
-			p.SetState(115)
-			p.Match(TExprParserT__0)
+			p.SetState(124)
+			p.Match(TExprParserLBRACKET)
 		}
-		p.SetState(117)
+		p.SetState(126)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 
 		if _la == TExprParserFloat {
 			{
-				p.SetState(116)
+				p.SetState(125)
 				p.Floats()
 			}
 
 		}
 		{
-			p.SetState(119)
-			p.Match(TExprParserT__1)
+			p.SetState(128)
+			p.Match(TExprParserRBRACKET)
 		}
 
 	case 4:
 		p.EnterOuterAlt(localctx, 4)
 		{
-			p.SetState(120)
-			p.Match(TExprParserT__0)
+			p.SetState(129)
+			p.Match(TExprParserLBRACKET)
 		}
-		p.SetState(122)
+		p.SetState(131)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 
 		if _la == TExprParserBoolean {
 			{
-				p.SetState(121)
+				p.SetState(130)
 				p.Booleans()
 			}
 
 		}
 		{
-			p.SetState(124)
-			p.Match(TExprParserT__1)
+			p.SetState(133)
+			p.Match(TExprParserRBRACKET)
 		}
 
 	}
@@ -2019,14 +2169,14 @@ func NewCalcContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokin
 
 func (s *CalcContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *CalcContext) Plus() IPlusContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IPlusContext)(nil)).Elem(), 0)
+func (s *CalcContext) Bit() IBitContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IBitContext)(nil)).Elem(), 0)
 
 	if t == nil {
 		return nil
 	}
 
-	return t.(IPlusContext)
+	return t.(IBitContext)
 }
 
 func (s *CalcContext) GetRuleContext() antlr.RuleContext {
@@ -2039,7 +2189,7 @@ func (s *CalcContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) s
 
 func (s *CalcContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitCalc(s)
 
 	default:
@@ -2049,7 +2199,7 @@ func (s *CalcContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 
 func (p *TExprParser) Calc() (localctx ICalcContext) {
 	localctx = NewCalcContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 16, TExprParserRULE_calc)
+	p.EnterRule(localctx, 18, TExprParserRULE_calc)
 
 	defer func() {
 		p.ExitRule()
@@ -2069,8 +2219,389 @@ func (p *TExprParser) Calc() (localctx ICalcContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(127)
+		p.SetState(136)
+		p.bit(0)
+	}
+
+	return localctx
+}
+
+// IBitContext is an interface to support dynamic dispatch.
+type IBitContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// IsBitContext differentiates from other interfaces.
+	IsBitContext()
+}
+
+type BitContext struct {
+	*antlr.BaseParserRuleContext
+	parser antlr.Parser
+}
+
+func NewEmptyBitContext() *BitContext {
+	var p = new(BitContext)
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	p.RuleIndex = TExprParserRULE_bit
+	return p
+}
+
+func (*BitContext) IsBitContext() {}
+
+func NewBitContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *BitContext {
+	var p = new(BitContext)
+
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = TExprParserRULE_bit
+
+	return p
+}
+
+func (s *BitContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *BitContext) Shift() IShiftContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IShiftContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IShiftContext)
+}
+
+func (s *BitContext) Bit() IBitContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IBitContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IBitContext)
+}
+
+func (s *BitContext) BAND() antlr.TerminalNode {
+	return s.GetToken(TExprParserBAND, 0)
+}
+
+func (s *BitContext) BEOR() antlr.TerminalNode {
+	return s.GetToken(TExprParserBEOR, 0)
+}
+
+func (s *BitContext) BIOR() antlr.TerminalNode {
+	return s.GetToken(TExprParserBIOR, 0)
+}
+
+func (s *BitContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *BitContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *BitContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case TExprParserVisitor:
+		return t.VisitBit(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+func (p *TExprParser) Bit() (localctx IBitContext) {
+	return p.bit(0)
+}
+
+func (p *TExprParser) bit(_p int) (localctx IBitContext) {
+	var _parentctx antlr.ParserRuleContext = p.GetParserRuleContext()
+	_parentState := p.GetState()
+	localctx = NewBitContext(p, p.GetParserRuleContext(), _parentState)
+	var _prevctx IBitContext = localctx
+	var _ antlr.ParserRuleContext = _prevctx // TODO: To prevent unused variable warning.
+	_startState := 20
+	p.EnterRecursionRule(localctx, 20, TExprParserRULE_bit, _p)
+
+	defer func() {
+		p.UnrollRecursionContexts(_parentctx)
+	}()
+
+	defer func() {
+		if err := recover(); err != nil {
+			if v, ok := err.(antlr.RecognitionException); ok {
+				localctx.SetException(v)
+				p.GetErrorHandler().ReportError(p, v)
+				p.GetErrorHandler().Recover(p, v)
+			} else {
+				panic(err)
+			}
+		}
+	}()
+
+	var _alt int
+
+	p.EnterOuterAlt(localctx, 1)
+	{
+		p.SetState(139)
+		p.shift(0)
+	}
+
+	p.GetParserRuleContext().SetStop(p.GetTokenStream().LT(-1))
+	p.SetState(152)
+	p.GetErrorHandler().Sync(p)
+	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 11, p.GetParserRuleContext())
+
+	for _alt != 2 && _alt != antlr.ATNInvalidAltNumber {
+		if _alt == 1 {
+			if p.GetParseListeners() != nil {
+				p.TriggerExitRuleEvent()
+			}
+			_prevctx = localctx
+			p.SetState(150)
+			p.GetErrorHandler().Sync(p)
+			switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 10, p.GetParserRuleContext()) {
+			case 1:
+				localctx = NewBitContext(p, _parentctx, _parentState)
+				p.PushNewRecursionContext(localctx, _startState, TExprParserRULE_bit)
+				p.SetState(141)
+
+				if !(p.Precpred(p.GetParserRuleContext(), 4)) {
+					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 4)", ""))
+				}
+				{
+					p.SetState(142)
+					p.Match(TExprParserBAND)
+				}
+				{
+					p.SetState(143)
+					p.shift(0)
+				}
+
+			case 2:
+				localctx = NewBitContext(p, _parentctx, _parentState)
+				p.PushNewRecursionContext(localctx, _startState, TExprParserRULE_bit)
+				p.SetState(144)
+
+				if !(p.Precpred(p.GetParserRuleContext(), 3)) {
+					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 3)", ""))
+				}
+				{
+					p.SetState(145)
+					p.Match(TExprParserBEOR)
+				}
+				{
+					p.SetState(146)
+					p.shift(0)
+				}
+
+			case 3:
+				localctx = NewBitContext(p, _parentctx, _parentState)
+				p.PushNewRecursionContext(localctx, _startState, TExprParserRULE_bit)
+				p.SetState(147)
+
+				if !(p.Precpred(p.GetParserRuleContext(), 2)) {
+					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 2)", ""))
+				}
+				{
+					p.SetState(148)
+					p.Match(TExprParserBIOR)
+				}
+				{
+					p.SetState(149)
+					p.shift(0)
+				}
+
+			}
+
+		}
+		p.SetState(154)
+		p.GetErrorHandler().Sync(p)
+		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 11, p.GetParserRuleContext())
+	}
+
+	return localctx
+}
+
+// IShiftContext is an interface to support dynamic dispatch.
+type IShiftContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// IsShiftContext differentiates from other interfaces.
+	IsShiftContext()
+}
+
+type ShiftContext struct {
+	*antlr.BaseParserRuleContext
+	parser antlr.Parser
+}
+
+func NewEmptyShiftContext() *ShiftContext {
+	var p = new(ShiftContext)
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	p.RuleIndex = TExprParserRULE_shift
+	return p
+}
+
+func (*ShiftContext) IsShiftContext() {}
+
+func NewShiftContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *ShiftContext {
+	var p = new(ShiftContext)
+
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = TExprParserRULE_shift
+
+	return p
+}
+
+func (s *ShiftContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *ShiftContext) Plus() IPlusContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IPlusContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IPlusContext)
+}
+
+func (s *ShiftContext) Shift() IShiftContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IShiftContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IShiftContext)
+}
+
+func (s *ShiftContext) LSHIFT() antlr.TerminalNode {
+	return s.GetToken(TExprParserLSHIFT, 0)
+}
+
+func (s *ShiftContext) RSHIFT() antlr.TerminalNode {
+	return s.GetToken(TExprParserRSHIFT, 0)
+}
+
+func (s *ShiftContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *ShiftContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *ShiftContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case TExprParserVisitor:
+		return t.VisitShift(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+func (p *TExprParser) Shift() (localctx IShiftContext) {
+	return p.shift(0)
+}
+
+func (p *TExprParser) shift(_p int) (localctx IShiftContext) {
+	var _parentctx antlr.ParserRuleContext = p.GetParserRuleContext()
+	_parentState := p.GetState()
+	localctx = NewShiftContext(p, p.GetParserRuleContext(), _parentState)
+	var _prevctx IShiftContext = localctx
+	var _ antlr.ParserRuleContext = _prevctx // TODO: To prevent unused variable warning.
+	_startState := 22
+	p.EnterRecursionRule(localctx, 22, TExprParserRULE_shift, _p)
+
+	defer func() {
+		p.UnrollRecursionContexts(_parentctx)
+	}()
+
+	defer func() {
+		if err := recover(); err != nil {
+			if v, ok := err.(antlr.RecognitionException); ok {
+				localctx.SetException(v)
+				p.GetErrorHandler().ReportError(p, v)
+				p.GetErrorHandler().Recover(p, v)
+			} else {
+				panic(err)
+			}
+		}
+	}()
+
+	var _alt int
+
+	p.EnterOuterAlt(localctx, 1)
+	{
+		p.SetState(156)
 		p.plus(0)
+	}
+
+	p.GetParserRuleContext().SetStop(p.GetTokenStream().LT(-1))
+	p.SetState(166)
+	p.GetErrorHandler().Sync(p)
+	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 13, p.GetParserRuleContext())
+
+	for _alt != 2 && _alt != antlr.ATNInvalidAltNumber {
+		if _alt == 1 {
+			if p.GetParseListeners() != nil {
+				p.TriggerExitRuleEvent()
+			}
+			_prevctx = localctx
+			p.SetState(164)
+			p.GetErrorHandler().Sync(p)
+			switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 12, p.GetParserRuleContext()) {
+			case 1:
+				localctx = NewShiftContext(p, _parentctx, _parentState)
+				p.PushNewRecursionContext(localctx, _startState, TExprParserRULE_shift)
+				p.SetState(158)
+
+				if !(p.Precpred(p.GetParserRuleContext(), 3)) {
+					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 3)", ""))
+				}
+				{
+					p.SetState(159)
+					p.Match(TExprParserLSHIFT)
+				}
+				{
+					p.SetState(160)
+					p.plus(0)
+				}
+
+			case 2:
+				localctx = NewShiftContext(p, _parentctx, _parentState)
+				p.PushNewRecursionContext(localctx, _startState, TExprParserRULE_shift)
+				p.SetState(161)
+
+				if !(p.Precpred(p.GetParserRuleContext(), 2)) {
+					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 2)", ""))
+				}
+				{
+					p.SetState(162)
+					p.Match(TExprParserRSHIFT)
+				}
+				{
+					p.SetState(163)
+					p.plus(0)
+				}
+
+			}
+
+		}
+		p.SetState(168)
+		p.GetErrorHandler().Sync(p)
+		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 13, p.GetParserRuleContext())
 	}
 
 	return localctx
@@ -2152,7 +2683,7 @@ func (s *PlusContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) s
 
 func (s *PlusContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitPlus(s)
 
 	default:
@@ -2170,8 +2701,8 @@ func (p *TExprParser) plus(_p int) (localctx IPlusContext) {
 	localctx = NewPlusContext(p, p.GetParserRuleContext(), _parentState)
 	var _prevctx IPlusContext = localctx
 	var _ antlr.ParserRuleContext = _prevctx // TODO: To prevent unused variable warning.
-	_startState := 18
-	p.EnterRecursionRule(localctx, 18, TExprParserRULE_plus, _p)
+	_startState := 24
+	p.EnterRecursionRule(localctx, 24, TExprParserRULE_plus, _p)
 
 	defer func() {
 		p.UnrollRecursionContexts(_parentctx)
@@ -2193,14 +2724,14 @@ func (p *TExprParser) plus(_p int) (localctx IPlusContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(130)
+		p.SetState(170)
 		p.multiplying(0)
 	}
 
 	p.GetParserRuleContext().SetStop(p.GetTokenStream().LT(-1))
-	p.SetState(140)
+	p.SetState(180)
 	p.GetErrorHandler().Sync(p)
-	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 10, p.GetParserRuleContext())
+	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 15, p.GetParserRuleContext())
 
 	for _alt != 2 && _alt != antlr.ATNInvalidAltNumber {
 		if _alt == 1 {
@@ -2208,49 +2739,49 @@ func (p *TExprParser) plus(_p int) (localctx IPlusContext) {
 				p.TriggerExitRuleEvent()
 			}
 			_prevctx = localctx
-			p.SetState(138)
+			p.SetState(178)
 			p.GetErrorHandler().Sync(p)
-			switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 9, p.GetParserRuleContext()) {
+			switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 14, p.GetParserRuleContext()) {
 			case 1:
 				localctx = NewPlusContext(p, _parentctx, _parentState)
 				p.PushNewRecursionContext(localctx, _startState, TExprParserRULE_plus)
-				p.SetState(132)
+				p.SetState(172)
 
 				if !(p.Precpred(p.GetParserRuleContext(), 3)) {
 					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 3)", ""))
 				}
 				{
-					p.SetState(133)
+					p.SetState(173)
 					p.Match(TExprParserPLUS)
 				}
 				{
-					p.SetState(134)
+					p.SetState(174)
 					p.multiplying(0)
 				}
 
 			case 2:
 				localctx = NewPlusContext(p, _parentctx, _parentState)
 				p.PushNewRecursionContext(localctx, _startState, TExprParserRULE_plus)
-				p.SetState(135)
+				p.SetState(175)
 
 				if !(p.Precpred(p.GetParserRuleContext(), 2)) {
 					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 2)", ""))
 				}
 				{
-					p.SetState(136)
+					p.SetState(176)
 					p.Match(TExprParserMINUS)
 				}
 				{
-					p.SetState(137)
+					p.SetState(177)
 					p.multiplying(0)
 				}
 
 			}
 
 		}
-		p.SetState(142)
+		p.SetState(182)
 		p.GetErrorHandler().Sync(p)
-		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 10, p.GetParserRuleContext())
+		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 15, p.GetParserRuleContext())
 	}
 
 	return localctx
@@ -2294,14 +2825,14 @@ func NewMultiplyingContext(parser antlr.Parser, parent antlr.ParserRuleContext, 
 
 func (s *MultiplyingContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *MultiplyingContext) Pow() IPowContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IPowContext)(nil)).Elem(), 0)
+func (s *MultiplyingContext) Atom() IAtomContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IAtomContext)(nil)).Elem(), 0)
 
 	if t == nil {
 		return nil
 	}
 
-	return t.(IPowContext)
+	return t.(IAtomContext)
 }
 
 func (s *MultiplyingContext) Multiplying() IMultiplyingContext {
@@ -2336,7 +2867,7 @@ func (s *MultiplyingContext) ToStringTree(ruleNames []string, recog antlr.Recogn
 
 func (s *MultiplyingContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitMultiplying(s)
 
 	default:
@@ -2354,8 +2885,8 @@ func (p *TExprParser) multiplying(_p int) (localctx IMultiplyingContext) {
 	localctx = NewMultiplyingContext(p, p.GetParserRuleContext(), _parentState)
 	var _prevctx IMultiplyingContext = localctx
 	var _ antlr.ParserRuleContext = _prevctx // TODO: To prevent unused variable warning.
-	_startState := 20
-	p.EnterRecursionRule(localctx, 20, TExprParserRULE_multiplying, _p)
+	_startState := 26
+	p.EnterRecursionRule(localctx, 26, TExprParserRULE_multiplying, _p)
 
 	defer func() {
 		p.UnrollRecursionContexts(_parentctx)
@@ -2377,14 +2908,14 @@ func (p *TExprParser) multiplying(_p int) (localctx IMultiplyingContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(144)
-		p.Pow()
+		p.SetState(184)
+		p.Atom()
 	}
 
 	p.GetParserRuleContext().SetStop(p.GetTokenStream().LT(-1))
-	p.SetState(157)
+	p.SetState(197)
 	p.GetErrorHandler().Sync(p)
-	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 12, p.GetParserRuleContext())
+	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 17, p.GetParserRuleContext())
 
 	for _alt != 2 && _alt != antlr.ATNInvalidAltNumber {
 		if _alt == 1 {
@@ -2392,199 +2923,66 @@ func (p *TExprParser) multiplying(_p int) (localctx IMultiplyingContext) {
 				p.TriggerExitRuleEvent()
 			}
 			_prevctx = localctx
-			p.SetState(155)
+			p.SetState(195)
 			p.GetErrorHandler().Sync(p)
-			switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 11, p.GetParserRuleContext()) {
+			switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 16, p.GetParserRuleContext()) {
 			case 1:
 				localctx = NewMultiplyingContext(p, _parentctx, _parentState)
 				p.PushNewRecursionContext(localctx, _startState, TExprParserRULE_multiplying)
-				p.SetState(146)
+				p.SetState(186)
 
 				if !(p.Precpred(p.GetParserRuleContext(), 4)) {
 					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 4)", ""))
 				}
 				{
-					p.SetState(147)
+					p.SetState(187)
 					p.Match(TExprParserMUL)
 				}
 				{
-					p.SetState(148)
-					p.Pow()
+					p.SetState(188)
+					p.Atom()
 				}
 
 			case 2:
 				localctx = NewMultiplyingContext(p, _parentctx, _parentState)
 				p.PushNewRecursionContext(localctx, _startState, TExprParserRULE_multiplying)
-				p.SetState(149)
+				p.SetState(189)
 
 				if !(p.Precpred(p.GetParserRuleContext(), 3)) {
 					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 3)", ""))
 				}
 				{
-					p.SetState(150)
+					p.SetState(190)
 					p.Match(TExprParserDIV)
 				}
 				{
-					p.SetState(151)
-					p.Pow()
+					p.SetState(191)
+					p.Atom()
 				}
 
 			case 3:
 				localctx = NewMultiplyingContext(p, _parentctx, _parentState)
 				p.PushNewRecursionContext(localctx, _startState, TExprParserRULE_multiplying)
-				p.SetState(152)
+				p.SetState(192)
 
 				if !(p.Precpred(p.GetParserRuleContext(), 2)) {
 					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 2)", ""))
 				}
 				{
-					p.SetState(153)
+					p.SetState(193)
 					p.Match(TExprParserMOD)
 				}
 				{
-					p.SetState(154)
-					p.Pow()
+					p.SetState(194)
+					p.Atom()
 				}
 
 			}
 
 		}
-		p.SetState(159)
+		p.SetState(199)
 		p.GetErrorHandler().Sync(p)
-		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 12, p.GetParserRuleContext())
-	}
-
-	return localctx
-}
-
-// IPowContext is an interface to support dynamic dispatch.
-type IPowContext interface {
-	antlr.ParserRuleContext
-
-	// GetParser returns the parser.
-	GetParser() antlr.Parser
-
-	// IsPowContext differentiates from other interfaces.
-	IsPowContext()
-}
-
-type PowContext struct {
-	*antlr.BaseParserRuleContext
-	parser antlr.Parser
-}
-
-func NewEmptyPowContext() *PowContext {
-	var p = new(PowContext)
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = TExprParserRULE_pow
-	return p
-}
-
-func (*PowContext) IsPowContext() {}
-
-func NewPowContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *PowContext {
-	var p = new(PowContext)
-
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
-
-	p.parser = parser
-	p.RuleIndex = TExprParserRULE_pow
-
-	return p
-}
-
-func (s *PowContext) GetParser() antlr.Parser { return s.parser }
-
-func (s *PowContext) AllAtom() []IAtomContext {
-	var ts = s.GetTypedRuleContexts(reflect.TypeOf((*IAtomContext)(nil)).Elem())
-	var tst = make([]IAtomContext, len(ts))
-
-	for i, t := range ts {
-		if t != nil {
-			tst[i] = t.(IAtomContext)
-		}
-	}
-
-	return tst
-}
-
-func (s *PowContext) Atom(i int) IAtomContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IAtomContext)(nil)).Elem(), i)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IAtomContext)
-}
-
-func (s *PowContext) POW() antlr.TerminalNode {
-	return s.GetToken(TExprParserPOW, 0)
-}
-
-func (s *PowContext) GetRuleContext() antlr.RuleContext {
-	return s
-}
-
-func (s *PowContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
-	return antlr.TreesStringTree(s, ruleNames, recog)
-}
-
-func (s *PowContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
-	switch t := visitor.(type) {
-	case TExprVisitor:
-		return t.VisitPow(s)
-
-	default:
-		return t.VisitChildren(s)
-	}
-}
-
-func (p *TExprParser) Pow() (localctx IPowContext) {
-	localctx = NewPowContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 22, TExprParserRULE_pow)
-
-	defer func() {
-		p.ExitRule()
-	}()
-
-	defer func() {
-		if err := recover(); err != nil {
-			if v, ok := err.(antlr.RecognitionException); ok {
-				localctx.SetException(v)
-				p.GetErrorHandler().ReportError(p, v)
-				p.GetErrorHandler().Recover(p, v)
-			} else {
-				panic(err)
-			}
-		}
-	}()
-
-	p.SetState(165)
-	p.GetErrorHandler().Sync(p)
-	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 13, p.GetParserRuleContext()) {
-	case 1:
-		p.EnterOuterAlt(localctx, 1)
-		{
-			p.SetState(160)
-			p.Atom()
-		}
-		{
-			p.SetState(161)
-			p.Match(TExprParserPOW)
-		}
-		{
-			p.SetState(162)
-			p.Atom()
-		}
-
-	case 2:
-		p.EnterOuterAlt(localctx, 2)
-		{
-			p.SetState(164)
-			p.Atom()
-		}
-
+		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 17, p.GetParserRuleContext())
 	}
 
 	return localctx
@@ -2652,14 +3050,14 @@ func (s *AtomContext) LPAREN() antlr.TerminalNode {
 	return s.GetToken(TExprParserLPAREN, 0)
 }
 
-func (s *AtomContext) Plus() IPlusContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IPlusContext)(nil)).Elem(), 0)
+func (s *AtomContext) Bit() IBitContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IBitContext)(nil)).Elem(), 0)
 
 	if t == nil {
 		return nil
 	}
 
-	return t.(IPlusContext)
+	return t.(IBitContext)
 }
 
 func (s *AtomContext) RPAREN() antlr.TerminalNode {
@@ -2686,7 +3084,7 @@ func (s *AtomContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) s
 
 func (s *AtomContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitAtom(s)
 
 	default:
@@ -2696,7 +3094,7 @@ func (s *AtomContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 
 func (p *TExprParser) Atom() (localctx IAtomContext) {
 	localctx = NewAtomContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 24, TExprParserRULE_atom)
+	p.EnterRule(localctx, 28, TExprParserRULE_atom)
 
 	defer func() {
 		p.ExitRule()
@@ -2714,43 +3112,43 @@ func (p *TExprParser) Atom() (localctx IAtomContext) {
 		}
 	}()
 
-	p.SetState(174)
+	p.SetState(207)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
-	case TExprParserT__0, TExprParserInteger, TExprParserFloat, TExprParserBoolean, TExprParserVarchar, TExprParserVARIABLE:
+	case TExprParserInteger, TExprParserFloat, TExprParserBoolean, TExprParserVarchar, TExprParserVARIABLE, TExprParserLBRACKET:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(167)
+			p.SetState(200)
 			p.Variable()
 		}
 
 	case TExprParserMINUS, TExprParserDIGIT:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(168)
+			p.SetState(201)
 			p.Scientific()
 		}
 
 	case TExprParserLPAREN:
 		p.EnterOuterAlt(localctx, 3)
 		{
-			p.SetState(169)
+			p.SetState(202)
 			p.Match(TExprParserLPAREN)
 		}
 		{
-			p.SetState(170)
-			p.plus(0)
+			p.SetState(203)
+			p.bit(0)
 		}
 		{
-			p.SetState(171)
+			p.SetState(204)
 			p.Match(TExprParserRPAREN)
 		}
 
 	case TExprParserIDENTIFIER:
 		p.EnterOuterAlt(localctx, 4)
 		{
-			p.SetState(173)
+			p.SetState(206)
 			p.Function()
 		}
 
@@ -2836,7 +3234,7 @@ func (s *ScientificContext) ToStringTree(ruleNames []string, recog antlr.Recogni
 
 func (s *ScientificContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitScientific(s)
 
 	default:
@@ -2846,7 +3244,7 @@ func (s *ScientificContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 
 func (p *TExprParser) Scientific() (localctx IScientificContext) {
 	localctx = NewScientificContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 26, TExprParserRULE_scientific)
+	p.EnterRule(localctx, 30, TExprParserRULE_scientific)
 
 	defer func() {
 		p.ExitRule()
@@ -2864,28 +3262,28 @@ func (p *TExprParser) Scientific() (localctx IScientificContext) {
 		}
 	}()
 
-	p.SetState(181)
+	p.SetState(214)
 	p.GetErrorHandler().Sync(p)
-	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 15, p.GetParserRuleContext()) {
+	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 19, p.GetParserRuleContext()) {
 	case 1:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(176)
+			p.SetState(209)
 			p.Number()
 		}
 		{
-			p.SetState(177)
+			p.SetState(210)
 			p.Match(TExprParserE)
 		}
 		{
-			p.SetState(178)
+			p.SetState(211)
 			p.Number()
 		}
 
 	case 2:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(180)
+			p.SetState(213)
 			p.Number()
 		}
 
@@ -2970,7 +3368,7 @@ func (s *FunctionContext) ToStringTree(ruleNames []string, recog antlr.Recognize
 
 func (s *FunctionContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitFunction(s)
 
 	default:
@@ -2980,7 +3378,7 @@ func (s *FunctionContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 
 func (p *TExprParser) Function() (localctx IFunctionContext) {
 	localctx = NewFunctionContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 28, TExprParserRULE_function)
+	p.EnterRule(localctx, 32, TExprParserRULE_function)
 
 	defer func() {
 		p.ExitRule()
@@ -3000,19 +3398,19 @@ func (p *TExprParser) Function() (localctx IFunctionContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(183)
+		p.SetState(216)
 		p.Funcname()
 	}
 	{
-		p.SetState(184)
+		p.SetState(217)
 		p.Match(TExprParserLPAREN)
 	}
 	{
-		p.SetState(185)
+		p.SetState(218)
 		p.Parameters()
 	}
 	{
-		p.SetState(186)
+		p.SetState(219)
 		p.Match(TExprParserRPAREN)
 	}
 
@@ -3071,7 +3469,7 @@ func (s *FuncnameContext) ToStringTree(ruleNames []string, recog antlr.Recognize
 
 func (s *FuncnameContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitFuncname(s)
 
 	default:
@@ -3081,7 +3479,7 @@ func (s *FuncnameContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 
 func (p *TExprParser) Funcname() (localctx IFuncnameContext) {
 	localctx = NewFuncnameContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 30, TExprParserRULE_funcname)
+	p.EnterRule(localctx, 34, TExprParserRULE_funcname)
 
 	defer func() {
 		p.ExitRule()
@@ -3101,7 +3499,7 @@ func (p *TExprParser) Funcname() (localctx IFuncnameContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(188)
+		p.SetState(221)
 		p.Match(TExprParserIDENTIFIER)
 	}
 
@@ -3169,6 +3567,14 @@ func (s *ParametersContext) Expression(i int) IExpressionContext {
 	return t.(IExpressionContext)
 }
 
+func (s *ParametersContext) AllCOMMA() []antlr.TerminalNode {
+	return s.GetTokens(TExprParserCOMMA)
+}
+
+func (s *ParametersContext) COMMA(i int) antlr.TerminalNode {
+	return s.GetToken(TExprParserCOMMA, i)
+}
+
 func (s *ParametersContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
@@ -3179,7 +3585,7 @@ func (s *ParametersContext) ToStringTree(ruleNames []string, recog antlr.Recogni
 
 func (s *ParametersContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitParameters(s)
 
 	default:
@@ -3189,7 +3595,7 @@ func (s *ParametersContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 
 func (p *TExprParser) Parameters() (localctx IParametersContext) {
 	localctx = NewParametersContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 32, TExprParserRULE_parameters)
+	p.EnterRule(localctx, 36, TExprParserRULE_parameters)
 	var _la int
 
 	defer func() {
@@ -3210,24 +3616,24 @@ func (p *TExprParser) Parameters() (localctx IParametersContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(190)
+		p.SetState(223)
 		p.expression(0)
 	}
-	p.SetState(195)
+	p.SetState(228)
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
-	for _la == TExprParserT__2 {
+	for _la == TExprParserCOMMA {
 		{
-			p.SetState(191)
-			p.Match(TExprParserT__2)
+			p.SetState(224)
+			p.Match(TExprParserCOMMA)
 		}
 		{
-			p.SetState(192)
+			p.SetState(225)
 			p.expression(0)
 		}
 
-		p.SetState(197)
+		p.SetState(230)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 	}
@@ -3299,7 +3705,7 @@ func (s *NumberContext) ToStringTree(ruleNames []string, recog antlr.Recognizer)
 
 func (s *NumberContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitNumber(s)
 
 	default:
@@ -3309,7 +3715,7 @@ func (s *NumberContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 
 func (p *TExprParser) Number() (localctx INumberContext) {
 	localctx = NewNumberContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 34, TExprParserRULE_number)
+	p.EnterRule(localctx, 38, TExprParserRULE_number)
 	var _la int
 
 	defer func() {
@@ -3331,25 +3737,25 @@ func (p *TExprParser) Number() (localctx INumberContext) {
 	var _alt int
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(199)
+	p.SetState(232)
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
 	if _la == TExprParserMINUS {
 		{
-			p.SetState(198)
+			p.SetState(231)
 			p.Match(TExprParserMINUS)
 		}
 
 	}
-	p.SetState(202)
+	p.SetState(235)
 	p.GetErrorHandler().Sync(p)
 	_alt = 1
 	for ok := true; ok; ok = _alt != 2 && _alt != antlr.ATNInvalidAltNumber {
 		switch _alt {
 		case 1:
 			{
-				p.SetState(201)
+				p.SetState(234)
 				p.Match(TExprParserDIGIT)
 			}
 
@@ -3357,26 +3763,26 @@ func (p *TExprParser) Number() (localctx INumberContext) {
 			panic(antlr.NewNoViableAltException(p, nil, nil, nil, nil, nil))
 		}
 
-		p.SetState(204)
+		p.SetState(237)
 		p.GetErrorHandler().Sync(p)
-		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 18, p.GetParserRuleContext())
+		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 22, p.GetParserRuleContext())
 	}
-	p.SetState(212)
+	p.SetState(245)
 	p.GetErrorHandler().Sync(p)
 
-	if p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 20, p.GetParserRuleContext()) == 1 {
+	if p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 24, p.GetParserRuleContext()) == 1 {
 		{
-			p.SetState(206)
+			p.SetState(239)
 			p.Match(TExprParserPOINT)
 		}
-		p.SetState(208)
+		p.SetState(241)
 		p.GetErrorHandler().Sync(p)
 		_alt = 1
 		for ok := true; ok; ok = _alt != 2 && _alt != antlr.ATNInvalidAltNumber {
 			switch _alt {
 			case 1:
 				{
-					p.SetState(207)
+					p.SetState(240)
 					p.Match(TExprParserDIGIT)
 				}
 
@@ -3384,9 +3790,9 @@ func (p *TExprParser) Number() (localctx INumberContext) {
 				panic(antlr.NewNoViableAltException(p, nil, nil, nil, nil, nil))
 			}
 
-			p.SetState(210)
+			p.SetState(243)
 			p.GetErrorHandler().Sync(p)
-			_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 19, p.GetParserRuleContext())
+			_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 23, p.GetParserRuleContext())
 		}
 
 	}
@@ -3432,8 +3838,8 @@ func NewRegexContext(parser antlr.Parser, parent antlr.ParserRuleContext, invoki
 
 func (s *RegexContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *RegexContext) Regex() antlr.TerminalNode {
-	return s.GetToken(TExprParserRegex, 0)
+func (s *RegexContext) REGEX() antlr.TerminalNode {
+	return s.GetToken(TExprParserREGEX, 0)
 }
 
 func (s *RegexContext) GetRuleContext() antlr.RuleContext {
@@ -3446,7 +3852,7 @@ func (s *RegexContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) 
 
 func (s *RegexContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitRegex(s)
 
 	default:
@@ -3456,7 +3862,7 @@ func (s *RegexContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 
 func (p *TExprParser) Regex() (localctx IRegexContext) {
 	localctx = NewRegexContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 36, TExprParserRULE_regex)
+	p.EnterRule(localctx, 40, TExprParserRULE_regex)
 
 	defer func() {
 		p.ExitRule()
@@ -3476,8 +3882,8 @@ func (p *TExprParser) Regex() (localctx IRegexContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(214)
-		p.Match(TExprParserRegex)
+		p.SetState(247)
+		p.Match(TExprParserREGEX)
 	}
 
 	return localctx
@@ -3535,7 +3941,7 @@ func (s *KindContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) s
 
 func (s *KindContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitKind(s)
 
 	default:
@@ -3545,7 +3951,7 @@ func (s *KindContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 
 func (p *TExprParser) Kind() (localctx IKindContext) {
 	localctx = NewKindContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 38, TExprParserRULE_kind)
+	p.EnterRule(localctx, 42, TExprParserRULE_kind)
 
 	defer func() {
 		p.ExitRule()
@@ -3565,7 +3971,7 @@ func (p *TExprParser) Kind() (localctx IKindContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(216)
+		p.SetState(249)
 		p.Match(TExprParserIDENTIFIER)
 	}
 
@@ -3618,6 +4024,14 @@ func (s *StringsContext) Varchar(i int) antlr.TerminalNode {
 	return s.GetToken(TExprParserVarchar, i)
 }
 
+func (s *StringsContext) AllCOMMA() []antlr.TerminalNode {
+	return s.GetTokens(TExprParserCOMMA)
+}
+
+func (s *StringsContext) COMMA(i int) antlr.TerminalNode {
+	return s.GetToken(TExprParserCOMMA, i)
+}
+
 func (s *StringsContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
@@ -3628,7 +4042,7 @@ func (s *StringsContext) ToStringTree(ruleNames []string, recog antlr.Recognizer
 
 func (s *StringsContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitStrings(s)
 
 	default:
@@ -3638,7 +4052,7 @@ func (s *StringsContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 
 func (p *TExprParser) Strings() (localctx IStringsContext) {
 	localctx = NewStringsContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 40, TExprParserRULE_strings)
+	p.EnterRule(localctx, 44, TExprParserRULE_strings)
 	var _la int
 
 	defer func() {
@@ -3661,37 +4075,37 @@ func (p *TExprParser) Strings() (localctx IStringsContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(218)
+		p.SetState(251)
 		p.Match(TExprParserVarchar)
 	}
-	p.SetState(223)
+	p.SetState(256)
 	p.GetErrorHandler().Sync(p)
-	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 21, p.GetParserRuleContext())
+	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 25, p.GetParserRuleContext())
 
 	for _alt != 2 && _alt != antlr.ATNInvalidAltNumber {
 		if _alt == 1 {
 			{
-				p.SetState(219)
-				p.Match(TExprParserT__2)
+				p.SetState(252)
+				p.Match(TExprParserCOMMA)
 			}
 			{
-				p.SetState(220)
+				p.SetState(253)
 				p.Match(TExprParserVarchar)
 			}
 
 		}
-		p.SetState(225)
+		p.SetState(258)
 		p.GetErrorHandler().Sync(p)
-		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 21, p.GetParserRuleContext())
+		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 25, p.GetParserRuleContext())
 	}
-	p.SetState(227)
+	p.SetState(260)
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
-	if _la == TExprParserT__2 {
+	if _la == TExprParserCOMMA {
 		{
-			p.SetState(226)
-			p.Match(TExprParserT__2)
+			p.SetState(259)
+			p.Match(TExprParserCOMMA)
 		}
 
 	}
@@ -3745,6 +4159,14 @@ func (s *IntegersContext) Integer(i int) antlr.TerminalNode {
 	return s.GetToken(TExprParserInteger, i)
 }
 
+func (s *IntegersContext) AllCOMMA() []antlr.TerminalNode {
+	return s.GetTokens(TExprParserCOMMA)
+}
+
+func (s *IntegersContext) COMMA(i int) antlr.TerminalNode {
+	return s.GetToken(TExprParserCOMMA, i)
+}
+
 func (s *IntegersContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
@@ -3755,7 +4177,7 @@ func (s *IntegersContext) ToStringTree(ruleNames []string, recog antlr.Recognize
 
 func (s *IntegersContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitIntegers(s)
 
 	default:
@@ -3765,7 +4187,7 @@ func (s *IntegersContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 
 func (p *TExprParser) Integers() (localctx IIntegersContext) {
 	localctx = NewIntegersContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 42, TExprParserRULE_integers)
+	p.EnterRule(localctx, 46, TExprParserRULE_integers)
 	var _la int
 
 	defer func() {
@@ -3788,37 +4210,37 @@ func (p *TExprParser) Integers() (localctx IIntegersContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(229)
+		p.SetState(262)
 		p.Match(TExprParserInteger)
 	}
-	p.SetState(234)
+	p.SetState(267)
 	p.GetErrorHandler().Sync(p)
-	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 23, p.GetParserRuleContext())
+	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 27, p.GetParserRuleContext())
 
 	for _alt != 2 && _alt != antlr.ATNInvalidAltNumber {
 		if _alt == 1 {
 			{
-				p.SetState(230)
-				p.Match(TExprParserT__2)
+				p.SetState(263)
+				p.Match(TExprParserCOMMA)
 			}
 			{
-				p.SetState(231)
+				p.SetState(264)
 				p.Match(TExprParserInteger)
 			}
 
 		}
-		p.SetState(236)
+		p.SetState(269)
 		p.GetErrorHandler().Sync(p)
-		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 23, p.GetParserRuleContext())
+		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 27, p.GetParserRuleContext())
 	}
-	p.SetState(238)
+	p.SetState(271)
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
-	if _la == TExprParserT__2 {
+	if _la == TExprParserCOMMA {
 		{
-			p.SetState(237)
-			p.Match(TExprParserT__2)
+			p.SetState(270)
+			p.Match(TExprParserCOMMA)
 		}
 
 	}
@@ -3872,6 +4294,14 @@ func (s *FloatsContext) Float(i int) antlr.TerminalNode {
 	return s.GetToken(TExprParserFloat, i)
 }
 
+func (s *FloatsContext) AllCOMMA() []antlr.TerminalNode {
+	return s.GetTokens(TExprParserCOMMA)
+}
+
+func (s *FloatsContext) COMMA(i int) antlr.TerminalNode {
+	return s.GetToken(TExprParserCOMMA, i)
+}
+
 func (s *FloatsContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
@@ -3882,7 +4312,7 @@ func (s *FloatsContext) ToStringTree(ruleNames []string, recog antlr.Recognizer)
 
 func (s *FloatsContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitFloats(s)
 
 	default:
@@ -3892,7 +4322,7 @@ func (s *FloatsContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 
 func (p *TExprParser) Floats() (localctx IFloatsContext) {
 	localctx = NewFloatsContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 44, TExprParserRULE_floats)
+	p.EnterRule(localctx, 48, TExprParserRULE_floats)
 	var _la int
 
 	defer func() {
@@ -3915,37 +4345,37 @@ func (p *TExprParser) Floats() (localctx IFloatsContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(240)
+		p.SetState(273)
 		p.Match(TExprParserFloat)
 	}
-	p.SetState(245)
+	p.SetState(278)
 	p.GetErrorHandler().Sync(p)
-	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 25, p.GetParserRuleContext())
+	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 29, p.GetParserRuleContext())
 
 	for _alt != 2 && _alt != antlr.ATNInvalidAltNumber {
 		if _alt == 1 {
 			{
-				p.SetState(241)
-				p.Match(TExprParserT__2)
+				p.SetState(274)
+				p.Match(TExprParserCOMMA)
 			}
 			{
-				p.SetState(242)
+				p.SetState(275)
 				p.Match(TExprParserFloat)
 			}
 
 		}
-		p.SetState(247)
+		p.SetState(280)
 		p.GetErrorHandler().Sync(p)
-		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 25, p.GetParserRuleContext())
+		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 29, p.GetParserRuleContext())
 	}
-	p.SetState(249)
+	p.SetState(282)
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
-	if _la == TExprParserT__2 {
+	if _la == TExprParserCOMMA {
 		{
-			p.SetState(248)
-			p.Match(TExprParserT__2)
+			p.SetState(281)
+			p.Match(TExprParserCOMMA)
 		}
 
 	}
@@ -3999,6 +4429,14 @@ func (s *BooleansContext) Boolean(i int) antlr.TerminalNode {
 	return s.GetToken(TExprParserBoolean, i)
 }
 
+func (s *BooleansContext) AllCOMMA() []antlr.TerminalNode {
+	return s.GetTokens(TExprParserCOMMA)
+}
+
+func (s *BooleansContext) COMMA(i int) antlr.TerminalNode {
+	return s.GetToken(TExprParserCOMMA, i)
+}
+
 func (s *BooleansContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
@@ -4009,7 +4447,7 @@ func (s *BooleansContext) ToStringTree(ruleNames []string, recog antlr.Recognize
 
 func (s *BooleansContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
-	case TExprVisitor:
+	case TExprParserVisitor:
 		return t.VisitBooleans(s)
 
 	default:
@@ -4019,7 +4457,7 @@ func (s *BooleansContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 
 func (p *TExprParser) Booleans() (localctx IBooleansContext) {
 	localctx = NewBooleansContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 46, TExprParserRULE_booleans)
+	p.EnterRule(localctx, 50, TExprParserRULE_booleans)
 	var _la int
 
 	defer func() {
@@ -4042,37 +4480,37 @@ func (p *TExprParser) Booleans() (localctx IBooleansContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(251)
+		p.SetState(284)
 		p.Match(TExprParserBoolean)
 	}
-	p.SetState(256)
+	p.SetState(289)
 	p.GetErrorHandler().Sync(p)
-	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 27, p.GetParserRuleContext())
+	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 31, p.GetParserRuleContext())
 
 	for _alt != 2 && _alt != antlr.ATNInvalidAltNumber {
 		if _alt == 1 {
 			{
-				p.SetState(252)
-				p.Match(TExprParserT__2)
+				p.SetState(285)
+				p.Match(TExprParserCOMMA)
 			}
 			{
-				p.SetState(253)
+				p.SetState(286)
 				p.Match(TExprParserBoolean)
 			}
 
 		}
-		p.SetState(258)
+		p.SetState(291)
 		p.GetErrorHandler().Sync(p)
-		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 27, p.GetParserRuleContext())
+		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 31, p.GetParserRuleContext())
 	}
-	p.SetState(260)
+	p.SetState(293)
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
-	if _la == TExprParserT__2 {
+	if _la == TExprParserCOMMA {
 		{
-			p.SetState(259)
-			p.Match(TExprParserT__2)
+			p.SetState(292)
+			p.Match(TExprParserCOMMA)
 		}
 
 	}
@@ -4089,14 +4527,28 @@ func (p *TExprParser) Sempred(localctx antlr.RuleContext, ruleIndex, predIndex i
 		}
 		return p.Expression_Sempred(t, predIndex)
 
-	case 9:
+	case 10:
+		var t *BitContext = nil
+		if localctx != nil {
+			t = localctx.(*BitContext)
+		}
+		return p.Bit_Sempred(t, predIndex)
+
+	case 11:
+		var t *ShiftContext = nil
+		if localctx != nil {
+			t = localctx.(*ShiftContext)
+		}
+		return p.Shift_Sempred(t, predIndex)
+
+	case 12:
 		var t *PlusContext = nil
 		if localctx != nil {
 			t = localctx.(*PlusContext)
 		}
 		return p.Plus_Sempred(t, predIndex)
 
-	case 10:
+	case 13:
 		var t *MultiplyingContext = nil
 		if localctx != nil {
 			t = localctx.(*MultiplyingContext)
@@ -4111,10 +4563,10 @@ func (p *TExprParser) Sempred(localctx antlr.RuleContext, ruleIndex, predIndex i
 func (p *TExprParser) Expression_Sempred(localctx antlr.RuleContext, predIndex int) bool {
 	switch predIndex {
 	case 0:
-		return p.Precpred(p.GetParserRuleContext(), 5)
+		return p.Precpred(p.GetParserRuleContext(), 4)
 
 	case 1:
-		return p.Precpred(p.GetParserRuleContext(), 4)
+		return p.Precpred(p.GetParserRuleContext(), 3)
 
 	case 2:
 		return p.Precpred(p.GetParserRuleContext(), 9)
@@ -4129,7 +4581,36 @@ func (p *TExprParser) Expression_Sempred(localctx antlr.RuleContext, predIndex i
 		return p.Precpred(p.GetParserRuleContext(), 6)
 
 	case 6:
+		return p.Precpred(p.GetParserRuleContext(), 5)
+
+	default:
+		panic("No predicate with index: " + fmt.Sprint(predIndex))
+	}
+}
+
+func (p *TExprParser) Bit_Sempred(localctx antlr.RuleContext, predIndex int) bool {
+	switch predIndex {
+	case 7:
+		return p.Precpred(p.GetParserRuleContext(), 4)
+
+	case 8:
 		return p.Precpred(p.GetParserRuleContext(), 3)
+
+	case 9:
+		return p.Precpred(p.GetParserRuleContext(), 2)
+
+	default:
+		panic("No predicate with index: " + fmt.Sprint(predIndex))
+	}
+}
+
+func (p *TExprParser) Shift_Sempred(localctx antlr.RuleContext, predIndex int) bool {
+	switch predIndex {
+	case 10:
+		return p.Precpred(p.GetParserRuleContext(), 3)
+
+	case 11:
+		return p.Precpred(p.GetParserRuleContext(), 2)
 
 	default:
 		panic("No predicate with index: " + fmt.Sprint(predIndex))
@@ -4138,10 +4619,10 @@ func (p *TExprParser) Expression_Sempred(localctx antlr.RuleContext, predIndex i
 
 func (p *TExprParser) Plus_Sempred(localctx antlr.RuleContext, predIndex int) bool {
 	switch predIndex {
-	case 7:
+	case 12:
 		return p.Precpred(p.GetParserRuleContext(), 3)
 
-	case 8:
+	case 13:
 		return p.Precpred(p.GetParserRuleContext(), 2)
 
 	default:
@@ -4151,13 +4632,13 @@ func (p *TExprParser) Plus_Sempred(localctx antlr.RuleContext, predIndex int) bo
 
 func (p *TExprParser) Multiplying_Sempred(localctx antlr.RuleContext, predIndex int) bool {
 	switch predIndex {
-	case 9:
+	case 14:
 		return p.Precpred(p.GetParserRuleContext(), 4)
 
-	case 10:
+	case 15:
 		return p.Precpred(p.GetParserRuleContext(), 3)
 
-	case 11:
+	case 16:
 		return p.Precpred(p.GetParserRuleContext(), 2)
 
 	default:

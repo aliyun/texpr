@@ -24,20 +24,36 @@ func (vg valuegetter) Get(name string) interface{} {
 }
 
 func TestEval(t *testing.T) {
-	expr, err := Compile("15")
+	var err error
+	var expr Expression
+	expr, err = Compile("15")
 	if err != nil {
 		t.Fatalf("expression err, %s", err)
 	}
 	v, err := expr.Eval(nil)
-	fmt.Println(v)
+	if v != 15.0 {
+		t.Fatalf("expect 15, actual %.1f", v)
+	}
+}
 
+func TestEval2(t *testing.T) {
+	var err error
+	var expr Expression
+	var v interface{}
 	expr, err = Compile("1 + 2")
 	if err != nil {
 		t.Fatalf("expression err, %s", err)
 	}
-	v, err = expr.Eval(nil)
-	fmt.Println(v)
+	v, _ = expr.Eval(nil)
+	if v != 3.0 {
+		t.Fatalf("expect 3, actual %.1f", v)
+	}
+}
 
+func TestEval3(t *testing.T) {
+	var err error
+	var expr Expression
+	var v interface{}
 	expr, err = Compile("1 + $v")
 	if err != nil {
 		t.Fatalf("expression err, %s", err)
@@ -65,19 +81,19 @@ func TestEval(t *testing.T) {
 	expr = MustCompile("( 3 + 5) * 10")
 	v, err = expr.Eval(nil)
 	if v != 80.0 {
-		t.FailNow()
+		t.Fatalf("expect 80, actual %.1f", v)
 	}
 
 	expr = MustCompile("63 % 10")
 	v, err = expr.Eval(nil)
 	if v != 3.0 {
-		t.FailNow()
+		t.Fatalf("expect 3.0, actual %.1f", v)
 	}
 
 	expr = MustCompile("2 ^ 3")
 	v, err = expr.Eval(nil)
-	if v != 8.0 {
-		t.FailNow()
+	if v != int64(1) {
+		t.Fatalf("expect 1, actual %d", v)
 	}
 
 	expr = MustCompile("2.5 * 2.0")
@@ -186,7 +202,10 @@ func TestEval(t *testing.T) {
 		t.FailNow()
 	}
 
-	expr = MustCompile("'vvv' in ['aaa', 'bbb', 'vvv']")
+	expr, err = Compile("'vvv' in ['aaa', 'bbb', 'vvv']")
+	if err != nil {
+		panic(err)
+	}
 	v, err = expr.Eval(nil)
 	if v != true {
 		fmt.Println("invalid value", v)
@@ -215,6 +234,16 @@ func TestEval(t *testing.T) {
 		t.FailNow()
 	}
 
+}
+
+func TestRegex(t *testing.T) {
+	expr := MustCompile("$val =~ /wo.*/ && $val =~/.*ld$/")
+	vg := MakeVG("$val", "world")
+	v, _ := expr.Eval(vg)
+	if v != true {
+		fmt.Println("invalid value", v)
+		t.FailNow()
+	}
 }
 
 func TestEvalFuncPlus(t *testing.T) {

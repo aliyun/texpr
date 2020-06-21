@@ -22,7 +22,7 @@ func Compile(expr string) (Expression, error) {
 	lexer := ast.NewTExprLexer(input)
 	stream := antlr.NewCommonTokenStream(lexer, 0)
 	p := ast.NewTExprParser(stream)
-	visitor := &ExprVisitor{}
+	visitor := &TExprParserVisitor{}
 	return p.Parse().Accept(visitor).(Expression), nil
 }
 
@@ -108,8 +108,24 @@ func mul(left, right interface{}) interface{} {
 	return left.(float64) * right.(float64)
 }
 
-func pow(left, right interface{}) interface{} {
-	return math.Pow(left.(float64), right.(float64))
+func shiftl(left, right interface{}) interface{} {
+	return int64(left.(float64)) << int64(right.(float64))
+}
+
+func shiftr(left, right interface{}) interface{} {
+	return int64(left.(float64)) >> int64(right.(float64))
+}
+
+func band(left, right interface{}) interface{} {
+	return int64(left.(float64)) & int64(right.(float64))
+}
+
+func beor(left, right interface{}) interface{} {
+	return int64(left.(float64)) ^ int64(right.(float64))
+}
+
+func bior(left, right interface{}) interface{} {
+	return int64(left.(float64)) | int64(right.(float64))
 }
 
 func mod(left, right interface{}) interface{} {
@@ -449,76 +465,76 @@ func NewMatchExpr(left Expression, regex string) (Expression, error) {
 	return &MatchExpr{left, r}, nil
 }
 
-type ExprVisitor struct {
-	*antlr.BaseParseTreeVisitor
+type TExprParserVisitor struct {
+	ast.TExprParserVisitor
 }
 
-func (v *ExprVisitor) VisitParse(ctx *ast.ParseContext) interface{} {
+func (v *TExprParserVisitor) VisitParse(ctx *ast.ParseContext) interface{} {
 	return ctx.Expression().Accept(v)
 }
 
-func (v *ExprVisitor) VisitBinaryExpression(ctx *ast.BinaryExpressionContext) interface{} {
+func (v *TExprParserVisitor) VisitBinaryExpression(ctx *ast.BinaryExpressionContext) interface{} {
 	op := ctx.Binary().Accept(v).(*OP)
 	left := ctx.Expression(0).Accept(v).(Expression)
 	right := ctx.Expression(1).Accept(v).(Expression)
 	return NewBiBoolExpr(left, right, op)
 }
 
-func (v *ExprVisitor) VisitMatchExpression(ctx *ast.MatchExpressionContext) interface{} {
+func (v *TExprParserVisitor) VisitMatchExpression(ctx *ast.MatchExpressionContext) interface{} {
 	left := ctx.Expression().Accept(v).(Expression)
 	regex := ctx.Regex().Accept(v).(*regexp.Regexp)
 	return &MatchExpr{left, regex}
 }
 
-func (v *ExprVisitor) VisitInExpression(ctx *ast.InExpressionContext) interface{} {
+func (v *TExprParserVisitor) VisitInExpression(ctx *ast.InExpressionContext) interface{} {
 	left := ctx.Expression().Accept(v).(Expression)
-	array := ctx.Array().Accept(v).(*ArrayExpr)
-	return &InExpr{left, array, false}
+	container := ctx.Container().Accept(v).(*ArrayExpr)
+	return &InExpr{left, container, false}
 }
 
-func (v *ExprVisitor) VisitIsTypeExpression(ctx *ast.IsTypeExpressionContext) interface{} {
+func (v *TExprParserVisitor) VisitIsTypeExpression(ctx *ast.IsTypeExpressionContext) interface{} {
 	kind := ctx.Kind().GetText()
 	val := ctx.Expression().Accept(v).(Expression)
 	return &IsTypeExpr{val, false, kind}
 }
 
-func (v *ExprVisitor) VisitCalcExpression(ctx *ast.CalcExpressionContext) interface{} {
+func (v *TExprParserVisitor) VisitCalcExpression(ctx *ast.CalcExpressionContext) interface{} {
 	return ctx.Calc().Accept(v)
 }
 
-func (v *ExprVisitor) VisitIsNotTypeExpression(ctx *ast.IsNotTypeExpressionContext) interface{} {
+func (v *TExprParserVisitor) VisitIsNotTypeExpression(ctx *ast.IsNotTypeExpressionContext) interface{} {
 	kind := ctx.Kind().GetText()
 	val := ctx.Expression().Accept(v).(Expression)
 	return &IsTypeExpr{val, true, kind}
 }
 
-func (v *ExprVisitor) VisitNotExpression(ctx *ast.NotExpressionContext) interface{} {
+func (v *TExprParserVisitor) VisitNotExpression(ctx *ast.NotExpressionContext) interface{} {
 	expr := ctx.Expression().Accept(v).(Expression)
 	return &NotExpr{expr}
 }
 
-func (v *ExprVisitor) VisitParenExpression(ctx *ast.ParenExpressionContext) interface{} {
+func (v *TExprParserVisitor) VisitParenExpression(ctx *ast.ParenExpressionContext) interface{} {
 	return ctx.Expression().Accept(v)
 }
 
-func (v *ExprVisitor) VisitNotInExpression(ctx *ast.NotInExpressionContext) interface{} {
+func (v *TExprParserVisitor) VisitNotInExpression(ctx *ast.NotInExpressionContext) interface{} {
 	left := ctx.Expression().Accept(v).(Expression)
-	array := ctx.Array().Accept(v).(*ArrayExpr)
-	return &InExpr{left, array, true}
+	container := ctx.Container().Accept(v).(*ArrayExpr)
+	return &InExpr{left, container, true}
 }
 
-func (v *ExprVisitor) VisitComparatorExpression(ctx *ast.ComparatorExpressionContext) interface{} {
+func (v *TExprParserVisitor) VisitComparatorExpression(ctx *ast.ComparatorExpressionContext) interface{} {
 	op := ctx.Comparator().Accept(v).(*OP)
 	left := ctx.Expression(0).Accept(v).(Expression)
 	right := ctx.Expression(1).Accept(v).(Expression)
 	return NewBiBoolExpr(left, right, op)
 }
 
-func (v *ExprVisitor) VisitVariableExpression(ctx *ast.VariableExpressionContext) interface{} {
+func (v *TExprParserVisitor) VisitVariableExpression(ctx *ast.VariableExpressionContext) interface{} {
 	return ctx.Variable().Accept(v)
 }
 
-func (v *ExprVisitor) VisitVariable(ctx *ast.VariableContext) interface{} {
+func (v *TExprParserVisitor) VisitVariable(ctx *ast.VariableContext) interface{} {
 	if ctx.VARIABLE() != nil {
 		name := ctx.VARIABLE().GetText()
 		return &VariableExpr{name}
@@ -532,7 +548,7 @@ func (v *ExprVisitor) VisitVariable(ctx *ast.VariableContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *ExprVisitor) VisitComparator(ctx *ast.ComparatorContext) interface{} {
+func (v *TExprParserVisitor) VisitComparator(ctx *ast.ComparatorContext) interface{} {
 	if ctx.GT() != nil {
 		return &OP{">", gt}
 	}
@@ -551,7 +567,7 @@ func (v *ExprVisitor) VisitComparator(ctx *ast.ComparatorContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *ExprVisitor) VisitBinary(ctx *ast.BinaryContext) interface{} {
+func (v *TExprParserVisitor) VisitBinary(ctx *ast.BinaryContext) interface{} {
 	if ctx.AND() != nil {
 		return &OP{"&&", and}
 	}
@@ -561,11 +577,11 @@ func (v *ExprVisitor) VisitBinary(ctx *ast.BinaryContext) interface{} {
 	return fmt.Errorf("invalid binary op type %s", ctx.GetText())
 }
 
-func (v *ExprVisitor) VisitBoolean(ctx *ast.BooleanContext) interface{} {
+func (v *TExprParserVisitor) VisitBoolean(ctx *ast.BooleanContext) interface{} {
 	return NewValueExpression(ctx.GetText() == "true")
 }
 
-func (v *ExprVisitor) VisitLiteral(ctx *ast.LiteralContext) interface{} {
+func (v *TExprParserVisitor) VisitLiteral(ctx *ast.LiteralContext) interface{} {
 	if ctx.Boolean() != nil {
 		vt, _ := strconv.ParseBool(ctx.Boolean().GetText())
 		return NewValueExpression(vt)
@@ -586,7 +602,20 @@ func (v *ExprVisitor) VisitLiteral(ctx *ast.LiteralContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *ExprVisitor) VisitArray(ctx *ast.ArrayContext) interface{} {
+func (v *TExprParserVisitor) VisitContainer(ctx *ast.ContainerContext) interface{} {
+	if ctx.Array() != nil {
+		return ctx.Array().Accept(v)
+	}
+	if ctx.Variable() != nil {
+		return ctx.Varchar().Accept(v)
+	}
+	if ctx.Varchar() != nil {
+		return ctx.Varchar().Accept(v)
+	}
+	return v.VisitContainer(ctx)
+}
+
+func (v *TExprParserVisitor) VisitArray(ctx *ast.ArrayContext) interface{} {
 	if ctx.Strings() != nil {
 		return ctx.Strings().Accept(v)
 	}
@@ -602,11 +631,44 @@ func (v *ExprVisitor) VisitArray(ctx *ast.ArrayContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *ExprVisitor) VisitCalc(ctx *ast.CalcContext) interface{} {
-	return ctx.Plus().Accept(v)
+func (v *TExprParserVisitor) VisitCalc(ctx *ast.CalcContext) interface{} {
+	return ctx.Bit().Accept(v)
 }
 
-func (v *ExprVisitor) VisitPlus(ctx *ast.PlusContext) interface{} {
+func (v *TExprParserVisitor) VisitBit(ctx *ast.BitContext) interface{} {
+	var left, right Expression
+	if ctx.Bit() != nil {
+		left = ctx.Bit().Accept(v).(Expression)
+	}
+	right = ctx.Shift().Accept(v).(Expression)
+	if ctx.BAND() != nil {
+		return NewBiCalcExpr(left, right, NewOP("&", band))
+	}
+	if ctx.BEOR() != nil {
+		return NewBiCalcExpr(left, right, NewOP("^", beor))
+	}
+	if ctx.BIOR() != nil {
+		return NewBiCalcExpr(left, right, NewOP("|", bior))
+	}
+	return right
+}
+
+func (v *TExprParserVisitor) VisitShift(ctx *ast.ShiftContext) interface{} {
+	var left, right Expression
+	if ctx.Shift() != nil {
+		left = ctx.Shift().Accept(v).(Expression)
+	}
+	right = ctx.Plus().Accept(v).(Expression)
+	if ctx.LSHIFT() != nil {
+		return NewBiCalcExpr(left, right, NewOP("<<", shiftl))
+	}
+	if ctx.RSHIFT() != nil {
+		return NewBiCalcExpr(left, right, NewOP(">>", shiftr))
+	}
+	return right
+}
+
+func (v *TExprParserVisitor) VisitPlus(ctx *ast.PlusContext) interface{} {
 	if ctx.MINUS() != nil {
 		left := ctx.Plus().Accept(v).(Expression)
 		right := ctx.Multiplying().Accept(v).(Expression)
@@ -619,37 +681,28 @@ func (v *ExprVisitor) VisitPlus(ctx *ast.PlusContext) interface{} {
 	return ctx.Multiplying().Accept(v)
 }
 
-func (v *ExprVisitor) VisitMultiplying(ctx *ast.MultiplyingContext) interface{} {
+func (v *TExprParserVisitor) VisitMultiplying(ctx *ast.MultiplyingContext) interface{} {
 	if ctx.DIV() != nil {
 		left := ctx.Multiplying().Accept(v).(Expression)
-		right := ctx.Pow().Accept(v).(Expression)
+		right := ctx.Atom().Accept(v).(Expression)
 		return NewBiCalcExpr(left, right, NewOP("/", div))
 	}
 	if ctx.MUL() != nil {
 		left := ctx.Multiplying().Accept(v).(Expression)
-		right := ctx.Pow().Accept(v).(Expression)
+		right := ctx.Atom().Accept(v).(Expression)
 		return NewBiCalcExpr(left, right, NewOP("*", mul))
 	}
 	if ctx.MOD() != nil {
 		left := ctx.Multiplying().Accept(v).(Expression)
-		right := ctx.Pow().Accept(v).(Expression)
+		right := ctx.Atom().Accept(v).(Expression)
 		return NewBiCalcExpr(left, right, NewOP("%", mod))
 	}
-	return ctx.Pow().Accept(v)
+	return ctx.Atom().Accept(v)
 }
 
-func (v *ExprVisitor) VisitPow(ctx *ast.PowContext) interface{} {
-	if ctx.POW() != nil {
-		left := ctx.Atom(0).Accept(v).(Expression)
-		right := ctx.Atom(1).Accept(v).(Expression)
-		return NewBiCalcExpr(left, right, NewOP("^", pow))
-	}
-	return ctx.Atom(0).Accept(v)
-}
-
-func (v *ExprVisitor) VisitAtom(ctx *ast.AtomContext) interface{} {
+func (v *TExprParserVisitor) VisitAtom(ctx *ast.AtomContext) interface{} {
 	if ctx.LPAREN() != nil && ctx.RPAREN() != nil {
-		return ctx.Plus().Accept(v)
+		return ctx.Bit().Accept(v)
 	}
 	if ctx.Variable() != nil {
 		return ctx.Variable().Accept(v)
@@ -664,11 +717,11 @@ func (v *ExprVisitor) VisitAtom(ctx *ast.AtomContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *ExprVisitor) VisitScientific(ctx *ast.ScientificContext) interface{} {
+func (v *TExprParserVisitor) VisitScientific(ctx *ast.ScientificContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *ExprVisitor) VisitFunction(ctx *ast.FunctionContext) interface{} {
+func (v *TExprParserVisitor) VisitFunction(ctx *ast.FunctionContext) interface{} {
 	params := ctx.Parameters().Accept(v).([]interface{})
 	fname := ctx.Funcname().Accept(v).(string)
 	f, b := funcMap[fname]
@@ -682,11 +735,11 @@ func (v *ExprVisitor) VisitFunction(ctx *ast.FunctionContext) interface{} {
 	return NewFuncExpr(fname, f, exprs)
 }
 
-func (v *ExprVisitor) VisitFuncname(ctx *ast.FuncnameContext) interface{} {
+func (v *TExprParserVisitor) VisitFuncname(ctx *ast.FuncnameContext) interface{} {
 	return ctx.IDENTIFIER().GetText()
 }
 
-func (v *ExprVisitor) VisitParameters(ctx *ast.ParametersContext) interface{} {
+func (v *TExprParserVisitor) VisitParameters(ctx *ast.ParametersContext) interface{} {
 	var params []interface{}
 	allExprs := ctx.AllExpression()
 	for i, _ := range allExprs {
@@ -695,22 +748,21 @@ func (v *ExprVisitor) VisitParameters(ctx *ast.ParametersContext) interface{} {
 	return params
 }
 
-
-func (v *ExprVisitor) VisitNumber(ctx *ast.NumberContext) interface{} {
+func (v *TExprParserVisitor) VisitNumber(ctx *ast.NumberContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *ExprVisitor) VisitRegex(ctx *ast.RegexContext) interface{} {
-	regex := ctx.Regex().GetText()
+func (v *TExprParserVisitor) VisitRegex(ctx *ast.RegexContext) interface{} {
+	regex := strings.TrimSpace(ctx.REGEX().GetText())
 	l := len(regex)
 	return regexp.MustCompile(regex[1 : l-1])
 }
 
-func (v *ExprVisitor) VisitKind(ctx *ast.KindContext) interface{} {
+func (v *TExprParserVisitor) VisitKind(ctx *ast.KindContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *ExprVisitor) VisitStrings(ctx *ast.StringsContext) interface{} {
+func (v *TExprParserVisitor) VisitStrings(ctx *ast.StringsContext) interface{} {
 	ss := make([]Expression, len(ctx.AllVarchar()))
 	for idx, _ := range ss {
 		s := ctx.Varchar(idx).GetText()
@@ -720,7 +772,7 @@ func (v *ExprVisitor) VisitStrings(ctx *ast.StringsContext) interface{} {
 	return &ArrayExpr{ss, reflect.TypeOf("")}
 }
 
-func (v *ExprVisitor) VisitIntegers(ctx *ast.IntegersContext) interface{} {
+func (v *TExprParserVisitor) VisitIntegers(ctx *ast.IntegersContext) interface{} {
 	ss := make([]Expression, len(ctx.AllInteger()))
 	for idx, _ := range ss {
 		s := ctx.Integer(idx).GetText()
@@ -730,7 +782,7 @@ func (v *ExprVisitor) VisitIntegers(ctx *ast.IntegersContext) interface{} {
 	return &ArrayExpr{ss, reflect.TypeOf(int64(0))}
 }
 
-func (v *ExprVisitor) VisitFloats(ctx *ast.FloatsContext) interface{} {
+func (v *TExprParserVisitor) VisitFloats(ctx *ast.FloatsContext) interface{} {
 	ss := make([]Expression, len(ctx.AllFloat()))
 	for idx, _ := range ss {
 		s := ctx.Float(idx).GetText()
@@ -740,7 +792,7 @@ func (v *ExprVisitor) VisitFloats(ctx *ast.FloatsContext) interface{} {
 	return &ArrayExpr{ss, reflect.TypeOf(float64(0))}
 }
 
-func (v *ExprVisitor) VisitBooleans(ctx *ast.BooleansContext) interface{} {
+func (v *TExprParserVisitor) VisitBooleans(ctx *ast.BooleansContext) interface{} {
 	ss := make([]Expression, len(ctx.AllBoolean()))
 	for idx, _ := range ss {
 		s := ctx.Boolean(idx).GetText()
