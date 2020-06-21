@@ -1,4 +1,4 @@
-// Code generated from TExpr.g4 by ANTLR 4.7.2. DO NOT EDIT.
+// Code generated from TExpr.g4 by ANTLR 4.8. DO NOT EDIT.
 
 package ast // TExpr
 import "github.com/antlr/antlr4/runtime/Go/antlr"
@@ -84,6 +84,9 @@ type TExprVisitor interface {
 
 	// Visit a parse tree produced by TExprParser#funcname.
 	VisitFuncname(ctx *FuncnameContext) interface{}
+
+	// Visit a parse tree produced by TExprParser#parameters.
+	VisitParameters(ctx *ParametersContext) interface{}
 
 	// Visit a parse tree produced by TExprParser#number.
 	VisitNumber(ctx *NumberContext) interface{}

@@ -1,4 +1,4 @@
-// Code generated from TExpr.g4 by ANTLR 4.7.2. DO NOT EDIT.
+// Code generated from TExpr.g4 by ANTLR 4.8. DO NOT EDIT.
 
 package ast // TExpr
 import "github.com/antlr/antlr4/runtime/Go/antlr"
@@ -108,6 +108,10 @@ func (v *BaseTExprVisitor) VisitFunction(ctx *FunctionContext) interface{} {
 }
 
 func (v *BaseTExprVisitor) VisitFuncname(ctx *FuncnameContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseTExprVisitor) VisitParameters(ctx *ParametersContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

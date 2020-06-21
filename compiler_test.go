@@ -2,6 +2,8 @@ package texpr
 
 import (
 	"fmt"
+	"math"
+	"reflect"
 	"testing"
 )
 
@@ -47,66 +49,66 @@ func TestEval(t *testing.T) {
 	}
 	fmt.Printf("%s == %.1f\n", expr, v)
 
-	expr, err = Compile("$v - 10")
+	expr = MustCompile("$v - 10")
 	v, err = expr.Eval(vg)
 	if err != nil {
 		t.Fatalf("expression err, %s", err)
 	}
 	fmt.Printf("%s == %.1f\n", expr, v)
 
-	expr, _ = Compile("2 * 15 / 10")
+	expr = MustCompile("2 * 15 / 10")
 	v, err = expr.Eval(nil)
 	if v != 3.0 {
 		t.FailNow()
 	}
 
-	expr, _ = Compile("( 3 + 5) * 10")
+	expr = MustCompile("( 3 + 5) * 10")
 	v, err = expr.Eval(nil)
 	if v != 80.0 {
 		t.FailNow()
 	}
 
-	expr, _ = Compile("63 % 10")
+	expr = MustCompile("63 % 10")
 	v, err = expr.Eval(nil)
 	if v != 3.0 {
 		t.FailNow()
 	}
 
-	expr, _ = Compile("2 ^ 3")
+	expr = MustCompile("2 ^ 3")
 	v, err = expr.Eval(nil)
 	if v != 8.0 {
 		t.FailNow()
 	}
 
-	expr, _ = Compile("2.5 * 2.0")
+	expr = MustCompile("2.5 * 2.0")
 	v, err = expr.Eval(nil)
 	if v != 5.0 {
 		fmt.Println("invalid value", v)
 		t.FailNow()
 	}
 
-	expr, _ = Compile("true")
+	expr = MustCompile("true")
 	v, err = expr.Eval(nil)
 	if v != true {
 		fmt.Println("invalid value", v)
 		t.FailNow()
 	}
 
-	expr, _ = Compile("true && false")
+	expr = MustCompile("true && false")
 	v, err = expr.Eval(nil)
 	if v != false {
 		fmt.Println("invalid value", v)
 		t.FailNow()
 	}
 
-	expr, _ = Compile("2 * 15 > 5 * 3")
+	expr = MustCompile("2 * 15 > 5 * 3")
 	v, err = expr.Eval(nil)
 	if v != true {
 		fmt.Println("invalid value", v)
 		t.FailNow()
 	}
 
-	expr, _ = Compile("60 * 1 > 2 && 16 > 5 * 3")
+	expr = MustCompile("60 * 1 > 2 && 16 > 5 * 3")
 	v, err = expr.Eval(nil)
 	if err != nil {
 		fmt.Println(err)
@@ -116,48 +118,48 @@ func TestEval(t *testing.T) {
 		t.FailNow()
 	}
 
-	expr, _ = Compile("60.1 * 1 > 2 * 15 > 5 * 3")
+	expr = MustCompile("60.1 * 1 > 2 * 15 > 5 * 3")
 	v, err = expr.Eval(nil)
 	if err == nil {
 		t.FailNow()
 	}
 
-	expr, _ = Compile("60 is integer")
+	expr = MustCompile("60 is integer")
 	v, err = expr.Eval(nil)
 	if v != true {
 		fmt.Println("invalid value", v)
 		t.FailNow()
 	}
 
-	expr, _ = Compile("true is not float")
+	expr = MustCompile("true is not float")
 	v, err = expr.Eval(nil)
 	if v != true {
 		fmt.Println("true is not float,invalid value", v)
 		t.FailNow()
 	}
 
-	expr, _ = Compile("'hello world' =~ /^hello .*$/")
+	expr = MustCompile("'hello world' =~ /^hello .*$/")
 	v, err = expr.Eval(nil)
 	if v != true {
 		fmt.Println("invalid value", v)
 		t.FailNow()
 	}
 
-	expr, _ = Compile("'15.5.5' is not ip4")
+	expr = MustCompile("'15.5.5' is not ip4")
 	v, err = expr.Eval(nil)
 	if v != true {
 		fmt.Println("invalid value", v)
 		t.FailNow()
 	}
 
-	expr, _ = Compile("'15.5.5.5' is ip4")
+	expr = MustCompile("'15.5.5.5' is ip4")
 	v, err = expr.Eval(nil)
 	if v != true {
 		fmt.Println("invalid value", v)
 		t.FailNow()
 	}
 
-	expr, _ = Compile("'chuanshi.zl' is host")
+	expr = MustCompile("'chuanshi.zl' is host")
 	v, err = expr.Eval(nil)
 	if v != true {
 		fmt.Println("invalid value", v)
@@ -165,7 +167,7 @@ func TestEval(t *testing.T) {
 	}
 
 	vg = MakeVG("$t", true)
-	expr, _ = Compile("$t")
+	expr = MustCompile("$t")
 	v, err = expr.Eval(vg)
 	if err != nil {
 		fmt.Println(err)
@@ -177,35 +179,35 @@ func TestEval(t *testing.T) {
 	}
 
 	vg = MakeVG("$f", false)
-	expr, _ = Compile("$f")
+	expr = MustCompile("$f")
 	v, err = expr.Eval(vg)
 	if v != false {
 		fmt.Println("invalid value ,,", v)
 		t.FailNow()
 	}
 
-	expr, _ = Compile("'vvv' in ['aaa', 'bbb', 'vvv']")
+	expr = MustCompile("'vvv' in ['aaa', 'bbb', 'vvv']")
 	v, err = expr.Eval(nil)
 	if v != true {
 		fmt.Println("invalid value", v)
 		t.FailNow()
 	}
 
-	expr, _ = Compile("'kkk' not in ['aaa', 'bbb', 'vvv']")
+	expr = MustCompile("'kkk' not in ['aaa', 'bbb', 'vvv']")
 	v, err = expr.Eval(nil)
 	if v != true {
 		fmt.Println("invalid value", v)
 		t.FailNow()
 	}
 
-	expr, _ = Compile("33.3  in [33.3, 44.4, 55.5]")
+	expr = MustCompile("33.3  in [33.3, 44.4, 55.5]")
 	v, err = expr.Eval(nil)
 	if v != true {
 		fmt.Println("invalid value", v)
 		t.FailNow()
 	}
 
-	expr, _ = Compile("@source == 'world'")
+	expr = MustCompile("@source == 'world'")
 	vg = MakeVG("@source", "world")
 	v, err = expr.Eval(vg)
 	if v != true {
@@ -213,4 +215,75 @@ func TestEval(t *testing.T) {
 		t.FailNow()
 	}
 
+}
+
+func TestEvalFuncPlus(t *testing.T) {
+	s := `eval('1+1')`
+	expr := MustCompile(s)
+	r, err := expr.Eval(nil)
+	if err != nil {
+		panic(err)
+	}
+	v := r.(float64)
+	if float64(2) != r {
+		t.Fatalf("expect 2, actual %.1f", v)
+	}
+}
+
+type PowFunc struct {
+	Function
+}
+
+func (f *PowFunc) Name() string {
+	return "pow"
+}
+
+func (f *PowFunc) Execute(vg ValueGetter, params []interface{}) (interface{}, error) {
+	if len(params) != 2 {
+		return nil, fmt.Errorf(`pow() takes exactly 2 argument (" + %d + " given)`, len(params))
+	}
+	x, err := toFloat64(params[0])
+	if err != nil {
+		return nil, err
+	}
+	y, err := toFloat64(params[1])
+	if err != nil {
+		return nil, err
+	}
+	return math.Pow(x, y), nil
+}
+
+func toFloat64(v interface{}) (float64, error) {
+	switch v.(type) {
+	case float64:
+		return v.(float64), nil
+	case int:
+		return float64(v.(int)), nil
+	case int8:
+		return float64(v.(int8)), nil
+	case int16:
+		return float64(v.(int16)), nil
+	case int32:
+		return float64(v.(int32)), nil
+	case int64:
+		return float64(v.(int64)), nil
+	case float32:
+		return float64(v.(float32)), nil
+	default:
+		return 0, fmt.Errorf(`pow() need string, %s found`, reflect.TypeOf(v).String())
+	}
+}
+
+func TestEvalFuncPow(t *testing.T) {
+	RegisterFunc(&PowFunc{})
+	s := `pow(2,3)`
+	expr := MustCompile(s)
+	r, err := expr.Eval(nil)
+	if err != nil {
+		panic(err)
+	}
+	v := r.(float64)
+	if float64(8) != r {
+		t.Fatalf("expect 8, actual %.1f", v)
+	}
 }

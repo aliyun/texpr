@@ -1,10 +1,66 @@
-# TExpr 
-Go语言布尔及数值运算表达式解析器
+# /Users/zhanglei/Work/Projects/texprTExpr 
+
 
 [![Build Status](https://travis-ci.org/aliyun/texpr.svg?branch=master)](https://travis-ci.org/aliyun/texpr)
 [![Coverage status](https://img.shields.io/codecov/c/github/aliyun/texpr/master.svg)](https://codecov.io/github/aliyun/texpr)
 
+Go语言布尔及数值运算表达式解析器
+
 [Java语言版本](https://github.com/tauris-io/expression)
+
+布尔表达式：
+
+```
+$country in ['cn', 'us', 'jp'] && $length > 100
+$host == 'cs.qa.com' && 'Webkit' not in $ua
+```
+
+数值运算表达式:
+
+```
+( 1 ^ 5) + (2 << 3)
+4 | 3 + 3
+```
+
+
+
+# Example
+
+```
+package main
+
+import (
+	"fmt"
+	"log"
+
+	"github.com/aliyun/texpr"
+)
+
+type context map[string]interface{}
+
+func (vg context) Get(name string) interface{} {
+	v, ok := vg[name]
+	if ok {
+		return v
+	}
+	return nil
+}
+
+func main() {
+	m := context {
+		"$value" : 15.0,
+	}
+	expr := texpr.MustCompile("$value - 10")
+	v, err := expr.Eval(m)
+	if err != nil {
+		log.Fatalf("expression err, %s", err)
+	}
+	fmt.Println(v) // 5
+}
+
+```
+
+
 
 ## Quick Start
 
@@ -19,7 +75,7 @@ go run test/simple/main.go "33 > 22 && 22 > 11"
 go run test/simple/main.go "'world' =~ /.+orl.+/"
 ```
 
-
+# 表达式语法
 
 ## 数值计算
 
@@ -40,7 +96,7 @@ go run test/simple/main.go "'world' =~ /.+orl.+/"
 
 | 操作符 | 描述                                                         | 例子         |
 | ------ | ------------------------------------------------------------ | ------------ |
-| =     | 两值相等     | A=B     |
+| ==    | 两值相等     | A==B    |
 | >   | 左值大于右值 | A>B  |
 | <    | 右值大于左值 | A<B |
 | >=     | 左值大于等于右值     | A>=B    |

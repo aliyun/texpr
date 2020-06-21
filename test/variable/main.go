@@ -7,15 +7,9 @@ import (
 	"github.com/aliyun/texpr"
 )
 
-type valuegetter map[string]interface{}
+type context map[string]interface{}
 
-func MakeVG(name string, val interface{}) valuegetter {
-	m := make(map[string]interface{})
-	m[name] = val
-	return m
-}
-
-func (vg valuegetter) Get(name string) interface{} {
+func (vg context) Get(name string) interface{} {
 	v, ok := vg[name]
 	if ok {
 		return v
@@ -24,10 +18,10 @@ func (vg valuegetter) Get(name string) interface{} {
 }
 
 func main() {
-	m := MakeVG("$value", 15.0)
-
+	m := context {
+		"$value" : 15.0,
+	}
 	expr, err := texpr.Compile("$value - 10")
-
 	if err != nil {
 		log.Fatalf("expression err, %s", err)
 	}

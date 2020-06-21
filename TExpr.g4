@@ -85,18 +85,15 @@ scientific
    ;
 
 function
-   : funcname LPAREN expression RPAREN
+   : funcname LPAREN parameters RPAREN
    ;
 
 funcname
-   : COS
-   | TAN
-   | SIN
-   | ACOS
-   | ATAN
-   | ASIN
-   | LOG
-   | LN
+   : IDENTIFIER
+   ;
+
+parameters
+   : expression (',' expression)*
    ;
 
 number

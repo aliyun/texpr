@@ -1,6 +1,7 @@
 package texpr
 
 import (
+	"errors"
 	"fmt"
 	"math"
 	"reflect"
@@ -28,7 +29,7 @@ func Compile(expr string) (Expression, error) {
 func MustCompile(expr string) Expression {
 	exp, err := Compile(expr)
 	if err != nil {
-		return nil
+		panic(`texpr: Compile("` + expr + `"): ` + err.Error())
 	}
 	return exp
 }
@@ -668,12 +669,32 @@ func (v *ExprVisitor) VisitScientific(ctx *ast.ScientificContext) interface{} {
 }
 
 func (v *ExprVisitor) VisitFunction(ctx *ast.FunctionContext) interface{} {
-	return v.VisitChildren(ctx)
+	params := ctx.Parameters().Accept(v).([]interface{})
+	fname := ctx.Funcname().Accept(v).(string)
+	f, b := funcMap[fname]
+	if !b {
+		return errors.New("unknown function " + fname)
+	}
+	exprs := make([]Expression, len(params))
+	for i, _ := range params {
+		exprs[i] = params[i].(Expression)
+	}
+	return NewFuncExpr(fname, f, exprs)
 }
 
 func (v *ExprVisitor) VisitFuncname(ctx *ast.FuncnameContext) interface{} {
-	return v.VisitChildren(ctx)
+	return ctx.IDENTIFIER().GetText()
 }
+
+func (v *ExprVisitor) VisitParameters(ctx *ast.ParametersContext) interface{} {
+	var params []interface{}
+	allExprs := ctx.AllExpression()
+	for i, _ := range allExprs {
+		params = append(params, allExprs[i].Accept(v))
+	}
+	return params
+}
+
 
 func (v *ExprVisitor) VisitNumber(ctx *ast.NumberContext) interface{} {
 	return v.VisitChildren(ctx)
