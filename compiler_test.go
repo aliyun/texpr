@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 	"reflect"
+	"strings"
 	"testing"
 )
 
@@ -246,6 +247,24 @@ func TestRegex(t *testing.T) {
 	}
 }
 
+func TestScalar(t *testing.T) {
+	expr := MustCompile("'test'")
+	vg := MakeVG("$val", "world")
+	v, _ := expr.Eval(vg)
+	if v.(string) != "test" {
+		fmt.Println("invalid value", v)
+		t.FailNow()
+	}
+
+	expr = MustCompile("true")
+	vg = MakeVG("$val", "world")
+	v, _ = expr.Eval(vg)
+	if v.(bool) != true {
+		fmt.Println("invalid value", v)
+		t.FailNow()
+	}
+}
+
 func TestEvalFuncPlus(t *testing.T) {
 	s := `eval('1+1')`
 	expr := MustCompile(s)
@@ -258,6 +277,7 @@ func TestEvalFuncPlus(t *testing.T) {
 		t.Fatalf("expect 2, actual %.1f", v)
 	}
 }
+
 
 type PowFunc struct {
 	Function
@@ -314,5 +334,32 @@ func TestEvalFuncPow(t *testing.T) {
 	v := r.(float64)
 	if float64(8) != r {
 		t.Fatalf("expect 8, actual %.1f", v)
+	}
+}
+
+
+type HasPrefixFunc struct {
+	Function
+}
+
+func (f *HasPrefixFunc) Name() string {
+	return "has_prefix"
+}
+
+func (f *HasPrefixFunc) Execute(vg ValueGetter, params []interface{}) (interface{}, error) {
+	if len(params) != 2 {
+		return nil, fmt.Errorf(`HasPrefixFunc() takes exactly 2 argument (" + %d + " given)`, len(params))
+	}
+	return strings.HasPrefix(params[0].(string), params[1].(string)), nil
+}
+
+
+func TestHasPrefixFuncPow(t *testing.T) {
+	RegisterFunc(&HasPrefixFunc{})
+	s := `has_prefix('hello world', 'hello')`
+	expr := MustCompile(s)
+	r, _ := expr.Eval(nil)
+	if r.(bool) != true {
+		t.Fatalf("expect true, actual %s", r)
 	}
 }
